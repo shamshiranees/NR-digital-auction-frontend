@@ -5,6 +5,9 @@ import {
   } from "@ant-design/icons";
 import { Colors } from '../Theme';
 const { Title, Text } = Typography;
+
+
+const { Meta } = Card;
 function MyBiddingCard({favorite=false}) {
     return (
         <Card

@@ -1,16 +1,56 @@
 .App {
   text-align: center;
 }
+.card-state .ant-card-cover .images {
+  height: 270px;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 4%);
+}
+
+.card-state .ant-card-cover .images:before {
+  background-image: linear-gradient(
+180deg
+,rgba(0,0,0,.2) 51.04%,rgba(0,0,0,.8));
+  opacity: 1;
+  transition: opacity .3s linear;
+}
+.card-state .ant-card-cover .images:after, .card-state .ant-card-cover .images:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-
+.ant-card-meta-title {
+  white-space: normal;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  margin-bottom: 10px !important;
+  
+}
  .ant-form-item {
 
   margin-right: 161px !important;
   margin-bottom: 25px !important;
+}
+
+.btn-heart {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  font-size: 18px !important;
+  height: 40px !important;
 }
 .ant-form-inline .ant-form-item > .ant-form-item-label {
   width: 112px !important;
@@ -32,9 +72,35 @@ font-size: 11px !important;
   width: 420px !important;
 } */
 .site-layout-content {
-  min-height: 280px;
+  min-height: 500px;
   padding: 24px;
   background: #fff;
+}
+
+.card-state .ant-card-cover .images .ant-row-flex {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  z-index: 10;
+}
+.card-state .top-panel .link-view-all {
+  position: absolute !important ;
+  top: -5px !important;
+  right: -5px !important;
+}
+.card-state .ant-card-cover .images h2.ant-typography {
+  color: #fff;
+  font-size: 34px;
+  margin: 0;
+}
+.card-state {
+  width: 100%;
+  border-radius: 12px !important;
+  overflow: hidden;
+  background-color: #fbfcfe;
+  margin: 0 0 30px;
 }
 #components-layout-demo-top .logo {
   float: left;
@@ -82,11 +148,11 @@ font-size: 34px;
 .auction-anchor{
   
   margin-left: 60px;
-  margin-top: -36px;
+  margin-top: -38px;
     border-top: 26px solid transparent;
     border-bottom: 26px solid transparent;
     border-left: 1em solid;
-    color: #395836;
+    color: #01172d;
 }
 .bid-amount {
   font-size: 56px;

@@ -12,6 +12,7 @@ import ThemeLayout from "./App/Components/ThemeLayout";
 import CreateAuction from "./App/Screens/CreateAuction/CreateAuction";
 import CreateSuccess from "./App/Screens/CreateAuction/CreateSuccess";
 import MyBiddings from "./App/Screens/MyBiddings/MyBiddings";
+import Category from "./App/Screens/Category/Category";
 
 const theme = createMuiTheme({
   palette: {
@@ -40,6 +41,8 @@ function App() {
             <Route exact path="/createauction" component={ThemeLayout(CreateAuction)} />
             <Route exact path="/createsuccess" component={ThemeLayout(CreateSuccess)} />
             <Route exact path="/myBiddings" component={ThemeLayout(MyBiddings)} />
+            <Route exact path="/category" component={ThemeLayout(Category)} />
+
 
 
             

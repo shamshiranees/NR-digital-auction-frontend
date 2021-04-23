@@ -153,9 +153,10 @@ function AuctionDetails() {
       <Title>Cashier Station - 96"x 32"x 42"</Title>
       <Card>
               <Swiper ref={ref} {...params}>
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((item) => (
+                {[0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((item) => (
                   <img
-                    src="https://c.imgix.net/ItemPicsOrganized/2021/April/14/512759_1.jpg?w=800&auto=format&q=75"
+                  src={`https://source.unsplash.com/random/300x200?sig=${item}`}
+
                     alt=""
                   />
                 ))}
@@ -189,7 +190,7 @@ function AuctionDetails() {
                         width: 80,
                         borderRadius: 5,
                       }}
-                      src="https://c.imgix.net/ItemPicsOrganized/2021/April/14/512759_1.jpg?w=800&auto=format&q=75"
+                      src={`https://source.unsplash.com/random/300x200?sig=${item}`}
                     />
                   </div>
                   </Col>
