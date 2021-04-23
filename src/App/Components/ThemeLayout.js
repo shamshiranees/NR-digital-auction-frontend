@@ -1,6 +1,7 @@
 import React from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
+import { Colors } from '../Theme';
 
 const { Header, Content, Footer } = Layout;
 export const ThemeLayout = (ComposedComponent, type = 'light') => (props) => {
@@ -32,7 +33,7 @@ export const ThemeLayout = (ComposedComponent, type = 'light') => (props) => {
       <ComposedComponent {...props} />
       </div>
     </Content>
-    <Footer style={{ textAlign: 'center' }}>Design ©2021 Created by Shamshir</Footer>
+    <Footer style={{ textAlign: 'center',backgroundColor:Colors.primary,color:Colors.white,height:200,float:'inline-end',paddingTop:170 }}>Design ©2021 Created by Shamshir</Footer>
   </Layout>
     )  
 }

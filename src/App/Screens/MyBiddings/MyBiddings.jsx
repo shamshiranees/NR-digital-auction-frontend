@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs, Typography, Card, Image, Tag } from "antd";
+import { Tabs, Typography, Card, Image, Tag, Row, Col } from "antd";
 import MyBiddingCard from "../../Components/MyBiddingCard";
 import Item from "antd/lib/list/Item";
 
@@ -11,7 +11,8 @@ function callback(key) {
 }
 function MyBiddings() {
   return (
-    <div>
+    <Row>
+      <Col  >
       <Title>My Biddings</Title>
       <Tabs defaultActiveKey="1" onChange={callback}>
         <TabPane tab="All" key="1">
@@ -32,7 +33,8 @@ function MyBiddings() {
           Content of Tab Pane 3
         </TabPane>
       </Tabs>
-    </div>
+      </Col>
+    </Row>
   );
 }
 

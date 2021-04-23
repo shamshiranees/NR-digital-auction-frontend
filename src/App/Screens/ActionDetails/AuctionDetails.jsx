@@ -127,11 +127,10 @@ function AuctionDetails() {
   return (
     <div>
       <div style={{width:'100%',backgroundColor:'#e6f7ff'}}>
-      <Alert style={{width: "50%",margin: 'auto'}} action={
-        <Button size="small" type="text">
-          Set reminder
-        </Button>
-      } message="This vehicle is in an auction that starts Thu, Apr 22 at 7:30 PM." banner type="info" showIcon />
+      <Alert style={{width: "50%",margin: 'auto'}} message={
+       <span>Bidding starts <strong>Sat, Apr 24 at 6:29 AM</strong><a><strong> Set reminder</strong></a></span>
+      }
+        banner type="info" showIcon />
       </div>
       {/* <div
         style={{
