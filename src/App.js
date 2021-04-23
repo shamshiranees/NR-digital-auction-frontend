@@ -10,6 +10,8 @@ import SignIn from "./App/Screens/Authentication/SignIn";
 import AuctionDetails from "./App/Screens/ActionDetails/AuctionDetails";
 import ThemeLayout from "./App/Components/ThemeLayout";
 import CreateAuction from "./App/Screens/CreateAuction/CreateAuction";
+import CreateSuccess from "./App/Screens/CreateAuction/CreateSuccess";
+import MyBiddings from "./App/Screens/MyBiddings/MyBiddings";
 
 const theme = createMuiTheme({
   palette: {
@@ -36,6 +38,13 @@ function App() {
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/login" component={SignIn} />
             <Route exact path="/createauction" component={ThemeLayout(CreateAuction)} />
+            <Route exact path="/createsuccess" component={ThemeLayout(CreateSuccess)} />
+            <Route exact path="/myBiddings" component={ThemeLayout(MyBiddings)} />
+
+
+            
+
+
 
             {/* <Route exact path="/profile" component={Profile} />
             <Route exact path="/myinvestments" component={MyInvestments} />

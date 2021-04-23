@@ -13,9 +13,14 @@ export const ThemeLayout = (ComposedComponent, type = 'light') => (props) => {
         <Menu.Item  key="1"><Link  to="/">Home</Link></Menu.Item>
         <Menu.Item key="2"><Link  to="/">All bids</Link></Menu.Item>
         <Menu.Item key="3"><Link  to="/createauction">Create</Link></Menu.Item>
+        <Menu.Item key="4"><Link  to="/myBiddings">My Biddings</Link></Menu.Item>
+
       </Menu>
     </Header>
-    <Content style={{ padding: '0 50px' }}>
+    <Content style={{maxWidth: 1230,
+    margin:'auto',
+    paddingRight: 15,
+    paddingLeft: 15 }}>
       <Breadcrumb style={{ margin: '16px 0' }}>
         <Breadcrumb.Item>Home</Breadcrumb.Item>
         <Breadcrumb.Item>List</Breadcrumb.Item>

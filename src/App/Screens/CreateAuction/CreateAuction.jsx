@@ -14,15 +14,18 @@ import {
 import { useSelector } from "react-redux";
 import PicturesWall from "./PhotoUpload";
 import { Typography } from 'antd';
+import { useHistory } from "react-router-dom";
+import SelectCategory from "../../Components/SelectCategory";
 
 const { Title } = Typography;
-
+const { TextArea } = Input;
 const CreateAuction = () => {
   const [componentSize, setComponentSize] = useState("default");
 const formValue = useSelector(state => state.auctionReducer.createAuction)
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
   };
+  const history = useHistory()
 
   return (
     <>
@@ -47,7 +50,11 @@ const formValue = useSelector(state => state.auctionReducer.createAuction)
           <Input  value={formValue.name}/>
         </Form.Item>
         <Form.Item label="Description">
-          <Input  value={formValue.description}/>
+        <TextArea value={formValue.description} rows={4} />
+          {/* <Input  value={formValue.description}/> */}
+        </Form.Item>
+        <Form.Item label="Category">
+        <SelectCategory/>
         </Form.Item>
         </Form>
         <Form
@@ -79,10 +86,10 @@ const formValue = useSelector(state => state.auctionReducer.createAuction)
         
        
       </Form>
-      <Form.Item label="Upload product Images">
+      <Form.Item label="Product Images">
         <PicturesWall/>
         </Form.Item>
-        <Button  style={{marginLeft:140,width:'80%',height:50}} block  type="primary" size="large">Submit</Button>
+        <Button onClick={()=>history.push('/createsuccess')} style={{marginLeft:140,width:'80%',height:50}} block  type="primary" size="large">Submit</Button>
     </>
   );
 };

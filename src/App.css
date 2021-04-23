@@ -15,7 +15,9 @@
 .ant-form-inline .ant-form-item > .ant-form-item-label {
   width: 112px !important;
 }
-
+.ant-card-body {
+  padding: 0px !important;
+}
 .ant-timeline-item {
 font-size: 11px !important;
 }

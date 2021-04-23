@@ -35,7 +35,7 @@ import { Link } from "react-router-dom";
 import { Colors } from "../../Theme";
 import Swiper from "react-id-swiper";
 import "swiper/css/swiper.css";
-import { Typography, Alert } from "antd";
+import { Typography, Alert,Row, Col  } from "antd";
 import { Statistic } from "antd";
 import { Timeline,notification } from 'antd';
 
@@ -148,11 +148,11 @@ function AuctionDetails() {
           Set reminder
         </Button>
       </div> */}
-      <div className={classes.heroContent}>
-        <Title>Cashier Station - 96"x 32"x 42"</Title>
-        <Grid container spacing={2} md="10">
-          <Grid item md="8">
-            <Card>
+
+<Row gutter={{ xs: 16, sm: 16, md: 24, lg: 32 }} style={{marginTop:30}}>
+      <Col className="gutter-row" span={16}>
+      <Title>Cashier Station - 96"x 32"x 42"</Title>
+      <Card>
               <Swiper ref={ref} {...params}>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((item) => (
                   <img
@@ -162,10 +162,12 @@ function AuctionDetails() {
                 ))}
               </Swiper>
             </Card>
-            <Grid item xs={12}>
-              <Grid container style={{ marginTop: 10 }}>
-                {/* <Grid item spacing={3} style={{ marginTop: 10 }}> */}
-                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((item) => (
+
+      
+            <Row gutter={[16, 16]} style={{marginTop:20}}>
+  
+  {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((item) => (
+    <Col span={3} >
                   <div
                     onClick={() => goToImage(item)}
                     style={{
@@ -178,11 +180,9 @@ function AuctionDetails() {
                           ? "3px solid green"
                           : "0px solid green",
 
-                      // borderColor:selectedImage===item?'red':'#000',
                       marginRight: 10,
                       marginBottom: 5,
-                      // backgroundImage:`url("https://c.imgix.net/ItemPicsOrganized/2021/April/14/512759_1.jpg?w=800&auto=format&q=75")`
-                    }}
+                     }}
                   >
                     <img
                       style={{
@@ -193,13 +193,13 @@ function AuctionDetails() {
                       src="https://c.imgix.net/ItemPicsOrganized/2021/April/14/512759_1.jpg?w=800&auto=format&q=75"
                     />
                   </div>
+                  </Col>
                 ))}
-                {/* </Grid> */}
-              </Grid>
-            </Grid>
-
-            <Grid item md="4">
-              <Title level={4}>Seller Info</Title>
+  
+  </Row>
+  <Row style={{marginTop:20}}>
+    <Col >
+  <Title level={4}>Seller Info</Title>
               <List>
                 {[
                   {
@@ -222,10 +222,14 @@ function AuctionDetails() {
                   </ListItem>
                 ))}
               </List>
-            </Grid>
-          </Grid>
-          <Grid item md="4">
-            <Card style={{ textAlign: "center", paddingTop: 20 }}>
+              </Col>
+            
+  </Row>
+      </Col>
+      
+      <Col  className="gutter-row" span={8}>
+
+      <Card style={{ textAlign: "center", paddingTop: 20 }}>
               <div className="bid-amount">$ 625</div>
               <div style={{ fontSize: 14, marginBottom: 20 }}>
                 Current Bid (97 bids)
@@ -295,21 +299,7 @@ function AuctionDetails() {
                           <em class="timestamp">4 minutes ago</em></Timeline.Item>))}
    
   </Timeline>
-                  {/* <Timeline style={{ marginLeft: -100 }}>
-                    {[0, 1, 2, 3, 4].map((item) => (
-                      <TimelineItem>
-                        <TimelineSeparator>
-                          <TimelineDot color="primary" />
-                          <TimelineConnector />
-                        </TimelineSeparator>
-                        <TimelineContent>
-                          {" "}
-                          <strong>$17,350</strong> by Bidder{" "}
-                          <em class="timestamp">4 minutes ago</em>
-                        </TimelineContent>
-                      </TimelineItem>
-                    ))}
-                  </Timeline> */}
+                
                 </div>
               </CardContent>
               <div>
@@ -359,10 +349,14 @@ function AuctionDetails() {
                 </div>
               </div>
             </Card>
-          </Grid>
-        </Grid>
-      </div>
-    </div>
+          
+      </Col>
+    </Row>
+
+
+
+     </div>
+     
   );
 }
 
