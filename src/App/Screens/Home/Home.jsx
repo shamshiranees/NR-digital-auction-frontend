@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import BidCard from '../../Components/BidCard';
+import ThemeLayout from '../../Components/ThemeLayout';
 
 
 export function Copyright() {
@@ -63,23 +64,12 @@ const useStyles = makeStyles((theme) => ({
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-export default function Album() {
+ function Album() {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
-      {/* <CssBaseline /> */}
-      <AppBar position="relative">
-        <Toolbar>
-          <Menu className={classes.icon} />
-          <Typography variant="h6" color="inherit" noWrap>
-          Digital Auction
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <main>
-        {/* Hero unit */}
-        <div className={classes.heroContent}>
+    <>
+    <div>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
               Digital Auction
@@ -111,18 +101,8 @@ export default function Album() {
             ))}
           </Grid>
         </Container>
-      </main>
-      {/* Footer */}
-      <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
-        </Typography>
-        <Copyright />
-      </footer>
-      {/* End footer */}
-    </React.Fragment>
+        </>
+    
   );
 }
+export default Album

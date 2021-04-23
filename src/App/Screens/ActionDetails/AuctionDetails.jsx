@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import Timeline from "@material-ui/lab/Timeline";
+// import Timeline from "@material-ui/lab/Timeline";
 import TimelineItem from "@material-ui/lab/TimelineItem";
 import TimelineSeparator from "@material-ui/lab/TimelineSeparator";
 import TimelineConnector from "@material-ui/lab/TimelineConnector";
@@ -35,18 +35,20 @@ import { Link } from "react-router-dom";
 import { Colors } from "../../Theme";
 import Swiper from "react-id-swiper";
 import "swiper/css/swiper.css";
-import { Typography } from "antd";
-import { Statistic, Row, Col } from "antd";
+import { Typography, Alert } from "antd";
+import { Statistic } from "antd";
+import { Timeline,notification } from 'antd';
 
 import {
   ShopOutlined,
   MailOutlined,
   PhoneOutlined,
   EnvironmentOutlined,
-  LoadingOutlined,
+  LoadingOutlined,CheckCircleTwoTone,
   PlusCircleTwoTone,
   MinusCircleTwoTone,
 } from "@ant-design/icons";
+import ThemeLayout from "../../Components/ThemeLayout";
 
 const { Countdown } = Statistic;
 const { Title } = Typography;
@@ -56,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   },
   heroContent: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(5, 10, 10, 25),
+    padding: theme.spacing(5, 10, 10, 15),
   },
 }));
 const StyledTableCell = withStyles((theme) => ({
@@ -70,6 +72,18 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 function AuctionDetails() {
+  const openNotification = () => {
+    notification.open({
+
+      icon:<CheckCircleTwoTone twoToneColor={Colors.green} />,
+      message: 'Bid Placed',
+      description:
+        'Your bid has been placed successfully. To claim the product, please wait until the bid time is over',
+      onClick: () => {
+        console.log('Notification Clicked!');
+      },
+    });
+  };
   const params = {
     pagination: {
       el: ".swiper-pagination",
@@ -112,15 +126,14 @@ function AuctionDetails() {
   const [currentBid, setcurrentBid] = useState(635);
   return (
     <div>
-      <AppBar position="relative">
-        <Toolbar>
-          <Menu />
-          <Typography variant="h6" color="inherit" noWrap>
-            Digital Auction
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <div
+      <div style={{width:'100%',backgroundColor:'#e6f7ff'}}>
+      <Alert style={{width: "50%",margin: 'auto'}} action={
+        <Button size="small" type="text">
+          Set reminder
+        </Button>
+      } message="This vehicle is in an auction that starts Thu, Apr 22 at 7:30 PM." banner type="info" showIcon />
+      </div>
+      {/* <div
         style={{
           height: 41,
           backgroundColor: "#E9F6FE",
@@ -134,19 +147,8 @@ function AuctionDetails() {
         <Button href="#text-buttons" color="primary" style={{ marginTop: -3 }}>
           Set reminder
         </Button>
-      </div>
+      </div> */}
       <div className={classes.heroContent}>
-        <Breadcrumbs aria-label="breadcrumb">
-          <Link color="grey" href="/">
-            All auction
-          </Link>
-          <Link color="grey" href="/getting-started/installation/">
-            Core
-          </Link>
-          <Typography color="textPrimary">
-            Cashier Station - 96"x 32"x 42"
-          </Typography>
-        </Breadcrumbs>
         <Title>Cashier Station - 96"x 32"x 42"</Title>
         <Grid container spacing={2} md="10">
           <Grid item md="8">
@@ -169,6 +171,7 @@ function AuctionDetails() {
                     style={{
                       height: 80,
                       width: 80,
+                      overflow: 'hidden',
                       borderRadius: 5,
                       border:
                         selectedImage === item
@@ -237,8 +240,8 @@ function AuctionDetails() {
                 }}
               >
                 <MinusCircleTwoTone
-                  twoToneColor={currentBid===635? "#ddd":Colors.secondary}
-                  style={{ fontSize: 40}}
+                  twoToneColor={currentBid === 635 ? "#ddd" : Colors.secondary}
+                  style={{ fontSize: 40 }}
                   onClick={() => setcurrentBid(currentBid - 15)}
                 />
                 <Title
@@ -255,10 +258,11 @@ function AuctionDetails() {
                 <PlusCircleTwoTone
                   onClick={() => setcurrentBid(currentBid + 15)}
                   twoToneColor={Colors.secondary}
-                  style={{ fontSize: 40,color: Colors.secondary}}
+                  style={{ fontSize: 40, color: Colors.secondary }}
                 />
               </div>
               <Button
+              onClick={()=>openNotification()}
                 variant="contained"
                 color="secondary"
                 style={{ margin: 20, color: Colors.white }}
@@ -286,7 +290,12 @@ function AuctionDetails() {
                     value={deadline}
                     format="HH:mm:ss"
                   />
-                  <Timeline style={{ marginLeft: -100 }}>
+                  <Timeline style={{ marginTop:20 }}>
+                  {[0, 1, 2, 3, 4].map((item) => ( <Timeline.Item><strong>$17,350</strong> by Bidder{" "}
+                          <em class="timestamp">4 minutes ago</em></Timeline.Item>))}
+   
+  </Timeline>
+                  {/* <Timeline style={{ marginLeft: -100 }}>
                     {[0, 1, 2, 3, 4].map((item) => (
                       <TimelineItem>
                         <TimelineSeparator>
@@ -300,7 +309,7 @@ function AuctionDetails() {
                         </TimelineContent>
                       </TimelineItem>
                     ))}
-                  </Timeline>
+                  </Timeline> */}
                 </div>
               </CardContent>
               <div>

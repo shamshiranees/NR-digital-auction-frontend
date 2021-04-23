@@ -11,7 +11,7 @@ import {
   CardHeader,
 } from "@material-ui/core";
 import { Colors, Helpers } from "../Theme";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
     paddingTop: theme.spacing(8),
@@ -32,8 +32,12 @@ const useStyles = makeStyles((theme) => ({
 
 function BidCard() {
   const classes = useStyles();
+  const history = useHistory();
+  function onPress() {
+    history.push("/detail/ssss");
+  }
   return (
-    <Grid click item xs={12} sm={6} md={4}>
+    <Grid onClick={()=>onPress()} item xs={12} sm={6} md={4}>
       <Card className={classes.card}>
         <CardHeader subheader="Lot #:44"></CardHeader>
         <CardMedia
