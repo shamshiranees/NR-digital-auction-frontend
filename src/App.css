@@ -33,6 +33,7 @@
 }
 .ant-card-meta-title {
   white-space: normal;
+  max-width: 90% !important;
   font-size: 20px !important;
   font-weight: 600 !important;
   line-height: 1.3 !important;
@@ -134,12 +135,12 @@ font-size: 11px !important;
   color: black;
   text-decoration: auto;
 }
-.ant-statistic{
-font-size: 34px;
+.ant-statistic-content{
+font-size: 34px !important;
     font-weight: 600;
-    margin-top: 20px;
-    width: 150px;
-    margin-left: 20px;
+    margin-top: 20px !important;
+    /* margin-bottom: 0px; */
+   
 }
 .MuiTimelineContent-root {
   text-align: left;
@@ -158,6 +159,7 @@ font-size: 34px;
   font-size: 56px;
   line-height: 1.2;
   font-weight: 400;
+  margin-bottom:10px !important;
 }
 .App-header {
   background-color: #282c34;
