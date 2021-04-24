@@ -3,7 +3,7 @@ import { Layout, Menu, Breadcrumb } from "antd";
 import { Link } from "react-router-dom";
 import { Colors } from "../Theme";
 import {
-  HomeFilled,
+  HomeOutlined,
   CalendarOutlined,
   ProfileOutlined,
   FolderAddOutlined,
@@ -19,7 +19,7 @@ export const ThemeLayout = (ComposedComponent, type = "light") => (props) => {
       <Header style={{ backgroundColor: Colors.white }}>
         <div className="logo" />
         <Menu theme="light" mode="horizontal">
-          <Menu.Item key="1" icon={<HomeFilled />}>
+          <Menu.Item key="1" icon={<HomeOutlined />}>
             <Link to="/">Home</Link>
           </Menu.Item>
           <Menu.Item key="2" icon={<CalendarOutlined />}>

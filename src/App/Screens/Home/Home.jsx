@@ -15,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import BidCard from '../../Components/BidCard';
 import ThemeLayout from '../../Components/ThemeLayout';
+import { useHistory } from 'react-router-dom';
 
 
 export function Copyright() {
@@ -66,7 +67,7 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
  function Album() {
   const classes = useStyles();
-
+const history = useHistory()
   return (
     <>
     <div>
@@ -80,7 +81,7 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button variant="contained" color="primary">
+                  <Button variant="contained" onClick={()=> history.push('/signup')} color="primary" >
                     Sign Up today!
                   </Button>
                 </Grid>

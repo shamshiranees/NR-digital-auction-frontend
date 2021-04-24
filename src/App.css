@@ -10,7 +10,9 @@
   cursor: pointer;
   box-shadow: 0 2px 8px rgb(0 0 0 / 4%);
 }
-
+.ant-menu-item {
+  font-size: 16px !important;
+}
 .card-state .ant-card-cover .images:before {
   background-image: linear-gradient(
 180deg

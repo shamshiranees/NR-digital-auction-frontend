@@ -50,7 +50,7 @@ import {
   MinusCircleTwoTone,
 } from "@ant-design/icons";
 import ThemeLayout from "../../Components/ThemeLayout";
-import flag from "../../assets/Images/flagCheck.png";
+import flag from "../../../assets/Images/flagCheck.png";
 
 const { Title } = Typography;
 const useStyles = makeStyles((theme) => ({
