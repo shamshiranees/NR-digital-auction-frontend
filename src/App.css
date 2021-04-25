@@ -78,6 +78,8 @@ font-size: 11px !important;
   min-height: 500px;
   padding: 24px;
   background: #fff;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .card-state .ant-card-cover .images .ant-row-flex {

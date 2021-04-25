@@ -70,7 +70,7 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const history = useHistory()
   return (
     <>
-    <div>
+    <div >
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
               Digital Auction

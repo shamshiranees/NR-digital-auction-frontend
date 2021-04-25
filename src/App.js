@@ -36,8 +36,8 @@ function App() {
           <Switch>
             <Route exact path="/" component={ThemeLayout(Home)} />
             <Route exact path="/detail/:id" component={ThemeLayout(AuctionDetails)} />
-            <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/login" component={SignIn} />
+            <Route exact path="/signup" component={ThemeLayout(SignUp,2)} />
+            <Route exact path="/login" component={ThemeLayout(SignIn,2)} />
             <Route exact path="/createauction" component={ThemeLayout(CreateAuction)} />
             <Route exact path="/createsuccess" component={ThemeLayout(CreateSuccess)} />
             <Route exact path="/myBiddings" component={ThemeLayout(MyBiddings)} />

@@ -13,7 +13,7 @@ import {
 } from "@ant-design/icons";
 const { Header, Content, Footer } = Layout;
 const { SubMenu } = Menu;
-export const ThemeLayout = (ComposedComponent, type = "light") => (props) => {
+export const ThemeLayout = (ComposedComponent, type = 1) => (props) => {
   return (
     <Layout className="layout">
       <Header style={{ backgroundColor: Colors.white }}>
@@ -45,10 +45,12 @@ export const ThemeLayout = (ComposedComponent, type = "light") => (props) => {
             <Link to="/">How It Works</Link>
           </Menu.Item>
 
-          <SubMenu key="7" title="Profile" icon={<UserOutlined />}>
-            <Menu.Item key="setting:1">View Profile</Menu.Item>
-            <Menu.Item key="setting:2">Sign Out</Menu.Item>
-          </SubMenu>
+          {type === 1 && (
+            <SubMenu key="7" title="Profile" icon={<UserOutlined />}>
+              <Menu.Item key="setting:1">View Profile</Menu.Item>
+              <Menu.Item key="setting:2">Sign Out</Menu.Item>
+            </SubMenu>
+          )}
         </Menu>
       </Header>
       <Content
@@ -59,11 +61,13 @@ export const ThemeLayout = (ComposedComponent, type = "light") => (props) => {
           paddingLeft: 15,
         }}
       >
-        <Breadcrumb style={{ margin: "16px 0" }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
+        {type === 1 && (
+          <Breadcrumb style={{ margin: "16px 0" }}>
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>List</Breadcrumb.Item>
+            <Breadcrumb.Item>App</Breadcrumb.Item>
+          </Breadcrumb>
+        )}
         <div className="site-layout-content">
           <ComposedComponent {...props} />
         </div>
