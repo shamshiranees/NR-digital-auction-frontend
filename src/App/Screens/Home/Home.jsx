@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/icons/Menu';
@@ -16,7 +16,8 @@ import Link from '@material-ui/core/Link';
 import BidCard from '../../Components/BidCard';
 import ThemeLayout from '../../Components/ThemeLayout';
 import { useHistory } from 'react-router-dom';
-
+import axios from 'axios'
+import { stringify } from 'uuid';
 
 export function Copyright() {
   return (
@@ -68,6 +69,36 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
  function Album() {
   const classes = useStyles();
 const history = useHistory()
+const [auctionData, setauctionData] = useState([])
+
+useEffect(() => {
+  axios.get('https://shareauction.herokuapp.com/api/auctions')
+  .then( (response)=> {
+    // handle success
+    console.log(response.data);
+
+    var allProjects = []
+    for (var key of Object.keys(response.data)) {
+
+
+const data = JSON.parse(response.data[key])
+
+allProjects.push(data)
+      
+  }
+  setauctionData(allProjects)
+  console.log(allProjects);
+
+  })
+  .catch((error)=> {
+    // handle error
+    console.log(error);
+  })
+  .then( ()=> {
+    // always executed
+  });
+
+}, [])
   return (
     <>
     <div >
@@ -97,8 +128,8 @@ const history = useHistory()
         <Container className={classes.cardGrid} >
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <BidCard  card={card}/>
+            {cards.map((item) => (
+              <BidCard  data={item}/>
             ))}
           </Grid>
         </Container>

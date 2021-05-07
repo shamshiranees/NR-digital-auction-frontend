@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function BidCard({type="normal"}) {
+function BidCard({type="normal",data}) {
   const classes = useStyles();
   const history = useHistory();
   function onPress() {
@@ -63,7 +63,7 @@ function BidCard({type="normal"}) {
       >
         <div className={classes.holder}>
           <Meta
-            title='Cashier Station - 96"x 32"x 42"'
+            title={data.auctionItemName!== undefined?data.auctionItemName:"Cashier Station"}
             description="Auction: Old Country Buffet - Kent"
           />
           <Button type="text" className="btn-heart" icon={<HeartOutlined />} />
