@@ -18,6 +18,9 @@ import ThemeLayout from '../../Components/ThemeLayout';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios'
 import { stringify } from 'uuid';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { fetchActiveBids } from '../../Redux/Actions/home';
 
 export function Copyright() {
   return (
@@ -69,34 +72,14 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
  function Album() {
   const classes = useStyles();
 const history = useHistory()
+const allBids = useSelector(({home}) => home.allBids)
+const dispatch = useDispatch()
 const [auctionData, setauctionData] = useState([])
 
 useEffect(() => {
-  axios.get('https://shareauction.herokuapp.com/api/auctions')
-  .then( (response)=> {
-    // handle success
-    console.log(response.data);
-
-    var allProjects = []
-    for (var key of Object.keys(response.data)) {
+  dispatch(fetchActiveBids())
 
 
-const data = JSON.parse(response.data[key])
-
-allProjects.push(data)
-      
-  }
-  setauctionData(allProjects)
-  console.log(allProjects);
-
-  })
-  .catch((error)=> {
-    // handle error
-    console.log(error);
-  })
-  .then( ()=> {
-    // always executed
-  });
 
 }, [])
   return (
@@ -128,8 +111,8 @@ allProjects.push(data)
         <Container className={classes.cardGrid} >
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((item) => (
-              <BidCard  data={item}/>
+            {allBids.map((item) => (
+              <BidCard  data={item} key={item.auctionId}/>
             ))}
           </Grid>
         </Container>

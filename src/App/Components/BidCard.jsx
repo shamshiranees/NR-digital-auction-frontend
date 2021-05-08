@@ -45,26 +45,28 @@ const useStyles = makeStyles((theme) => ({
 function BidCard({type="normal",data}) {
   const classes = useStyles();
   const history = useHistory();
-  function onPress() {
-    history.push("/detail/ssss");
+  function onPress(id) {
+    history.push(`/detail/${id}`,{selectedItem:data});
   }
   return (
-    <Grid onClick={() => onPress()} item xs={12} sm={6} md={type==='category'?3:4}>
+    <Grid onClick={() => onPress(data.auctionId)} item xs={12} sm={6} md={type==='category'?3:4}>
       <Card
         hoverable
         className={classes.cardItem}
         cover={
           <img
+          style={{height:250}}
             alt="example"
-            src={`https://source.unsplash.com/random/300x200?sig=${Math.random()}`}
+            src={data.images[0]}
           />
         }
         actions={[]}
       >
         <div className={classes.holder}>
           <Meta
+          style={{height:100,overflow:'hidden'}}
             title={data.auctionItemName!== undefined?data.auctionItemName:"Cashier Station"}
-            description="Auction: Old Country Buffet - Kent"
+            description={data.description}
           />
           <Button type="text" className="btn-heart" icon={<HeartOutlined />} />
         </div>
@@ -99,7 +101,7 @@ function BidCard({type="normal",data}) {
               <div
                 style={{ fontSize: 18, fontWeight: "bold", textAlign: "right" }}
               >
-                50.00
+                ${data.currentBid}
               </div>
             </div>
           </div>

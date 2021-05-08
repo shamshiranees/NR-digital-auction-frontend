@@ -23,7 +23,7 @@ const apiMiddleware = ({dispatch}) => (next) => (action) => {
     : 'data';
 
   //axios default configs
-  axios.defaults.baseURL = 'https://data.messari.io/api/v1/';
+  axios.defaults.baseURL = 'https://shareauction.herokuapp.com/api';
 
   axios({
     method: method,
@@ -38,8 +38,8 @@ const apiMiddleware = ({dispatch}) => (next) => (action) => {
     .catch((error) => {
       console.log('error', error);
 
-      dispatch(apiError(error.response.status));
-      dispatch(onFailure(error));
+      // dispatch(apiError(error.response.status));
+      // dispatch(onFailure(error));
 
       // if (error.response && error.response.status === 403) {
       //   dispatch(accessDenied(window.location.pathname));

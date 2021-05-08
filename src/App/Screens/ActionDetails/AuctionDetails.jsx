@@ -51,6 +51,8 @@ import {
 } from "@ant-design/icons";
 import ThemeLayout from "../../Components/ThemeLayout";
 import flag from "../../../assets/Images/flagCheck.png";
+import { useEffect } from "react";
+import moment from 'moment'
 
 const { Title } = Typography;
 const useStyles = makeStyles((theme) => ({
@@ -72,7 +74,16 @@ const StyledTableCell = withStyles((theme) => ({
     fontWeight: "bold",
   },
 }))(TableCell);
-function AuctionDetails() {
+function AuctionDetails({location,match}) {
+console.log("----route",location.state.selectedItem);
+console.log("----route",match.params.id);
+
+const selectedData = location.state.selectedItem
+
+useEffect(() => {
+  
+}, [])
+
   const openNotification = () => {
     setdeadline(Date.now() + 20000)
     notification.open({
@@ -96,26 +107,20 @@ function AuctionDetails() {
     },
   };
   const data = [
-    { name: "Lot #", value: "2" },
-    { name: "Auction ID:", value: "51112" },
-    { name: "Seller:", value: "Ehli Auctions" },
-    { name: "Quantity", value: "1" },
-    { name: "Buyers Premium:", value: "15%" },
-    { name: "Item Unit:", value: "1" },
+    { name: "Lot #", value: selectedData.lotNo},
+    { name: "Auction ID:", value: selectedData.auctionId },
+    { name: "Seller:", value:selectedData.sellerName },
+    { name: "Quantity", value: selectedData.quantity },
+    { name: "Buyers Premium:", value: selectedData.buyersPremium+'%' },
+    { name: "Item Unit:", value: selectedData.itemUnit },
     { name: "Current Bid:", value: "$ 50.00 No Reserve" },
-    { name: "Bid Increment:", value: "$ 10.00" },
-    { name: "Next Bid:", value: "$ 60.00" },
+    { name: "Bid Increment:", value: "$"+selectedData.bidIncrement },
+    { name: "Next Bid:", value: "$"+ Number(selectedData.bidIncrement+selectedData.currentBid) },
   ];
-  const dataa = [
-    "Racing car sprays burning fuel into crowd.",
-    "Japanese princess to wed commoner.",
-    "Australian walks 100km after outback crash.",
-    "Man charged over missing wedding girl.",
-    "Los Angeles battles huge wildfires.",
-  ];
+ 
   const [selectedImage, setSelectedImage] = useState(0);
   const [progress, setProgress] = useState(10);
-  const [deadline, setdeadline] = useState(Date.now() + 20000);
+  const [deadline, setdeadline] = useState(selectedData.endDateTime*1000);
   const classes = useStyles();
   const ref = useRef(null);
 
@@ -135,15 +140,16 @@ function AuctionDetails() {
     setdeadline(Date.now() + item.total);
   };
 
-  const [currentBid, setcurrentBid] = useState(635);
+  const [currentBid, setcurrentBid] = useState(selectedData.currentBid);
   return (
     <div>
+      {selectedData.startDateTime<new Date() &&
       <div style={{ width: "100%", backgroundColor: "#e6f7ff" }}>
         <Alert
           style={{ width: "50%", margin: "auto" }}
           message={
             <span>
-              Bidding starts <strong>Sat, Apr 24 at 6:29 AM</strong>
+              Bidding starts <strong>{moment(selectedData.startDateTime*1000).format('llll')}</strong>
               <a>
                 <strong> Set reminder</strong>
               </a>
@@ -153,19 +159,20 @@ function AuctionDetails() {
           type="info"
           showIcon
         />
-      </div>
+      </div>}
 
       <Row
         gutter={{ xs: 16, sm: 16, md: 24, lg: 32 }}
         style={{ marginTop: 30 }}
       >
         <Col className="gutter-row" span={16}>
-          <Title>Cashier Station - 96"x 32"x 42"</Title>
+          <Title>{selectedData.auctionItemName}</Title>
           <Card>
             <Swiper ref={ref} {...params}>
-              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((item) => (
+              {selectedData.images.map((item) => (
                 <img
-                  src={`https://source.unsplash.com/random/300x200?sig=${item}`}
+                style={{height:'auto'}}
+                  src={item}
                   alt=""
                 />
               ))}
@@ -173,17 +180,17 @@ function AuctionDetails() {
           </Card>
 
           <Row gutter={[16, 16]} style={{ marginTop: 20 }}>
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((item) => (
+            {selectedData.images.map((item,index) => (
               <Col span={3}>
                 <div
-                  onClick={() => goToImage(item)}
+                  onClick={() => goToImage(index)}
                   style={{
                     height: 80,
                     width: 80,
                     overflow: "hidden",
                     borderRadius: 5,
                     border:
-                      selectedImage === item
+                      selectedImage === index
                         ? "3px solid green"
                         : "0px solid green",
 
@@ -197,7 +204,7 @@ function AuctionDetails() {
                       width: 80,
                       borderRadius: 5,
                     }}
-                    src={`https://source.unsplash.com/random/300x200?sig=${item}`}
+                    src={item}
                   />
                 </div>
               </Col>
@@ -209,13 +216,13 @@ function AuctionDetails() {
               <List>
                 {[
                   {
-                    title: "AutoReturn - Indianapolis",
+                    title: selectedData.sellerName,
                     icon: <ShopOutlined />,
                   },
-                  { title: "abc@gmail.com", icon: <MailOutlined /> },
-                  { title: "+13173084479", icon: <PhoneOutlined /> },
+                  { title: selectedData.sellerEmail, icon: <MailOutlined /> },
+                  { title: selectedData.sellerPhone, icon: <PhoneOutlined /> },
                   {
-                    title: "2451 S. Belmont Ave Indianapolis, In 46221",
+                    title: selectedData.sellerAddress,
                     icon: <EnvironmentOutlined />,
                   },
                 ].map((item) => (
@@ -237,24 +244,24 @@ function AuctionDetails() {
             {progress === 0 ? (
               <div>
                 <img src={flag} style={{ height: 150, width: 150 }} />
-                <div className="bid-amount">SOLD $ 625</div>
+                <div className="bid-amount">SOLD $ {selectedData.currentBid}</div>
               </div>
             ) : (
               <div>
-                <div className="bid-amount">$ 625</div>
+                <div className="bid-amount">${selectedData.currentBid}</div>
                 <div style={{ fontSize: 14, marginBottom: 20 }}>
                   Current Bid (97 bids)
                 </div>
                 <Divider />
 
-                <Countdown
+                {selectedData.startDateTime>new Date() &&   <Countdown
                   className="ant-statistic-content"
                   onComplete={bidTimesUp}
                   daysInHours={true}
                   date={deadline}
                   onTick={(s) => onCounterValueChange(s)}
                 />
-
+                }
                 {progress < 10 ? (
                   <Progress
                     percent={10 - progress === 0 ? 100 : (10 - progress) * 10}
@@ -275,10 +282,10 @@ function AuctionDetails() {
                 >
                   <MinusCircleTwoTone
                     twoToneColor={
-                      currentBid === 635 ? "#ddd" : Colors.secondary
+                      currentBid === selectedData.currentBid ? "#ddd" : Colors.secondary
                     }
                     style={{ fontSize: 40 }}
-                    onClick={() => setcurrentBid(currentBid - 15)}
+                    onClick={() => currentBid === selectedData.currentBid ?setcurrentBid(currentBid):setcurrentBid(currentBid - selectedData.bidIncrement)}
                   />
                   <Title
                     style={{
@@ -289,10 +296,10 @@ function AuctionDetails() {
                     }}
                     level={2}
                   >
-                    $ {currentBid}
+                    $ {currentBid + selectedData.bidIncrement}
                   </Title>
                   <PlusCircleTwoTone
-                    onClick={() => setcurrentBid(currentBid + 15)}
+                    onClick={() => setcurrentBid(currentBid + selectedData.bidIncrement)}
                     twoToneColor={Colors.secondary}
                     style={{ fontSize: 40, color: Colors.secondary }}
                   />
