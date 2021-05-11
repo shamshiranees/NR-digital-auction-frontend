@@ -30,6 +30,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^2.0.3",
+    "socket.io-client": "^2.3.0",
     "swiper": "^5.4.5",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.1"

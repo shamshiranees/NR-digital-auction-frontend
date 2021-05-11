@@ -13,6 +13,10 @@ export const SET_AUCTION_PARAMS_VALUE = 'SET_AUCTION_PARAMS_VALUE';
 export const FETCH_ALL_BID_DATA = 'FETCH_ALL_BID_DATA';
 
 export const SET_ALL_BIDS = 'SET_ALL_BIDS';
+export const SET_BIDDINGS = 'SET_BIDDINGS';
+
+
+
 
 
 

@@ -53,7 +53,15 @@ import ThemeLayout from "../../Components/ThemeLayout";
 import flag from "../../../assets/Images/flagCheck.png";
 import { useEffect } from "react";
 import moment from 'moment'
+import { useDispatch, useSelector } from "react-redux";
+import { getAuctionBiddings, placeNewBid } from "../../Redux/Actions/home";
+import { months } from "moment";
+import { initiateSocket,sendMessage,onNewMessage} from './SocketIO';
+  // import { io } from "socket.io-client";
+  // CommonJS
+  import { io } from "socket.io-client";
 
+  
 const { Title } = Typography;
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -74,18 +82,57 @@ const StyledTableCell = withStyles((theme) => ({
     fontWeight: "bold",
   },
 }))(TableCell);
-function AuctionDetails({location,match}) {
-console.log("----route",location.state.selectedItem);
-console.log("----route",match.params.id);
 
+
+
+
+
+function AuctionDetails({location,match}) {
+
+
+
+
+
+  
+// console.log("----route",location.state.selectedItem);
+// console.log("----route",match.params.id);
+const auctionId = match.params.id
 const selectedData = location.state.selectedItem
+const dispatch = useDispatch()
+const biddings = useSelector(({home}) => home.auctionBiddings)
+console.log("ppppppp",biddings);
+
+
 
 useEffect(() => {
-  
+  initiateSocket()
+  onNewMessage().then(ff=>{
+    console.log("gggpppppp",ff);
+    
+  })
+dispatch(getAuctionBiddings(match.params.id))
+return () => {
+ 
+}
 }, [])
 
-  const openNotification = () => {
-    setdeadline(Date.now() + 20000)
+  const openNotification = (currentBid) => {
+  const existingBids = JSON.parse(JSON.stringify(biddings))
+
+const newbid =  {
+  auctionId:auctionId,
+userId:'xxxxx',
+  username:'shamshir anees',
+  bidAmount:currentBid,
+  bidTime: moment().unix()
+}
+const newArray = existingBids.concat([newbid])
+
+const params = { currentBid:currentBid,
+auctionId:auctionId,biddings:newArray}
+console.log("params",params);
+//  dispatch(placeNewBid(params))
+sendMessage('sss',"shasmhir Anees")
     notification.open({
       icon: <CheckCircleTwoTone twoToneColor={Colors.green} />,
       message: "Bid Placed",
@@ -143,6 +190,7 @@ useEffect(() => {
   const [currentBid, setcurrentBid] = useState(selectedData.currentBid);
   return (
     <div>
+      
       {selectedData.startDateTime<new Date() &&
       <div style={{ width: "100%", backgroundColor: "#e6f7ff" }}>
         <Alert
@@ -305,7 +353,7 @@ useEffect(() => {
                   />
                 </div>
                 <Button
-                  onClick={() => openNotification()}
+                  onClick={() => openNotification(currentBid + selectedData.bidIncrement)}
                   variant="contained"
                   color="secondary"
                   style={{ margin: 20, color: Colors.white }}
@@ -317,9 +365,9 @@ useEffect(() => {
             <Divider />
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Timeline style={{ marginTop: 35, marginBottom: -20 }}>
-                {[0, 1, 2, 3, 4].map((item) => (
+                {biddings.map((item) => (
                   <Timeline.Item>
-                    <strong>$17,350</strong> by Bidder{" "}
+                    <strong>${item.bidAmount}</strong> by Bidder
                     <em class="timestamp">4 minutes ago</em>
                   </Timeline.Item>
                 ))}

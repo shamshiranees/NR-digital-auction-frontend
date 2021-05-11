@@ -2,7 +2,7 @@ import apiAction from './index';
 import {
   DATA_FETCH_ERROR,
   FETCH_ALL_BID_DATA,
-  SET_CURRENCY_DATA,SET_ALL_BIDS,
+  SET_BIDDINGS,SET_ALL_BIDS,
   ADD_CURRENCY,
   REMOVE_CURRENCY,
 } from './types';
@@ -17,6 +17,56 @@ export function fetchActiveBids() {
     label: FETCH_ALL_BID_DATA,
   });
 }
+
+
+
+export function placeNewBid(data) {
+  return apiAction({
+    url:
+      `/bidding`,
+    method: 'POST',
+    data:data,
+    onSuccess: ()=>placedNewBidSuccessfull(data),
+    onFailure: setOnError,
+    label: FETCH_ALL_BID_DATA,
+  });
+}
+
+export function placedNewBidSuccessfull(data) {
+
+  console.log("placedNewBidSuccessfull",data);
+  
+  return {
+    type: SET_BIDDINGS,
+    payload: data.biddings,
+  };
+}
+
+export function getAuctionBiddings(id) {
+  return apiAction({
+    url:
+      `/bidding/${id}`,
+    method: 'GET',
+    onSuccess: setBidding,
+    onFailure: setOnError,
+    label: FETCH_ALL_BID_DATA,
+  });
+}
+export function setBidding(data) {
+  var allBids = data.data[0]
+ 
+
+
+const item = JSON.parse(allBids)
+
+console.log("---------ssss",item);
+
+  return {
+    type: SET_BIDDINGS,
+    payload: item.biddings,
+  };
+}
+
 
 export function setAllBidData(allBids) {
 

@@ -23,7 +23,7 @@ const apiMiddleware = ({dispatch}) => (next) => (action) => {
     : 'data';
 
   //axios default configs
-  axios.defaults.baseURL = 'https://shareauction.herokuapp.com/api';
+  axios.defaults.baseURL = 'https://socket-io-2.herokuapp.com/api';
 
   axios({
     method: method,
