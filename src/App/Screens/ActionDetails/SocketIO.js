@@ -21,20 +21,12 @@ export const subscribeToChat = (cb) => {
     return cb(null, msg);
   });
 };
-export const sendMessage = (room, message) => {
+export const sendMessage = (newBid) => {
   if (socket)
-    socket.emit("send-message", {
-      room,
-      message,
-      senderName: socket.id,
-      id: Date.now(),
-    });
+    socket.emit("send-message", newBid);
 };
-export const onNewMessage = () => {
-  if (socket)
-    return socket.on("message", (message) => {
-      console.log("new message rece", message);
+export function socketClient(){
+    return socket
 
-      return message;
-    });
-};
+}
+

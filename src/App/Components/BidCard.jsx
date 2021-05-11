@@ -12,6 +12,8 @@ import { Card, Button, Typography } from "antd";
 import { Colors, Helpers } from "../Theme";
 import { Link, useHistory } from "react-router-dom";
 import { HeartOutlined } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
+import { setBidding, setBiddingsOnClick } from "../Redux/Actions/home";
 const { Title } = Typography;
 const { Meta } = Card;
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +47,14 @@ const useStyles = makeStyles((theme) => ({
 function BidCard({type="normal",data}) {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch()
   function onPress(id) {
+const biddingData = {
+  currentBid: data.currentBid,
+  auctionId: data.auctionId,
+  biddings: [],
+}
+    dispatch(setBiddingsOnClick(biddingData))
     history.push(`/detail/${id}`,{selectedItem:data});
   }
   return (

@@ -8,14 +8,14 @@ import {
 
 const INITIAL_STATE = {
   allBids: [],
-  auctionBiddings:[]
+  auctionBiddings:{currentBid:'',biddings:[]}
 };
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case SET_ALL_BIDS:
       return { ...state, allBids: action.payload };
     case SET_BIDDINGS:
-      return { ...state, auctionBiddings: action.payload };
+      return { ...state, auctionBiddings: action.payload!= null?action.payload:state.auctionBiddings };
         
       
     case REMOVE_CURRENCY:

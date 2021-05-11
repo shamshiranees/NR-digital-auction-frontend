@@ -6,6 +6,7 @@ import {
   ADD_CURRENCY,
   REMOVE_CURRENCY,
 } from './types';
+import { sendMessage } from '../../Screens/ActionDetails/SocketIO';
 
 export function fetchActiveBids() {
   return apiAction({
@@ -20,13 +21,13 @@ export function fetchActiveBids() {
 
 
 
-export function placeNewBid(data) {
+export function placeNewBid(data,newbid) {
   return apiAction({
     url:
       `/bidding`,
     method: 'POST',
     data:data,
-    onSuccess: ()=>placedNewBidSuccessfull(data),
+    onSuccess: ()=>placedNewBidSuccessfull(data,newbid),
     onFailure: setOnError,
     label: FETCH_ALL_BID_DATA,
   });
@@ -34,11 +35,12 @@ export function placeNewBid(data) {
 
 export function placedNewBidSuccessfull(data) {
 
-  console.log("placedNewBidSuccessfull",data);
+  console.log("------placedNewBidSuccessfull",data);
+  
   
   return {
     type: SET_BIDDINGS,
-    payload: data.biddings,
+    payload: data,
   };
 }
 
@@ -61,9 +63,19 @@ const item = JSON.parse(allBids)
 
 console.log("---------ssss",item);
 
+
   return {
     type: SET_BIDDINGS,
-    payload: item.biddings,
+    payload: item,
+  };
+}
+
+export function setBiddingsOnClick(data) {
+  
+
+  return {
+    type: SET_BIDDINGS,
+    payload: data,
   };
 }
 

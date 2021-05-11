@@ -52,16 +52,19 @@ import {
 import ThemeLayout from "../../Components/ThemeLayout";
 import flag from "../../../assets/Images/flagCheck.png";
 import { useEffect } from "react";
-import moment from 'moment'
+import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuctionBiddings, placeNewBid } from "../../Redux/Actions/home";
+import {
+  getAuctionBiddings,
+  placedNewBidSuccessfull,
+} from "../../Redux/Actions/home";
 import { months } from "moment";
-import { initiateSocket,sendMessage,onNewMessage} from './SocketIO';
-  // import { io } from "socket.io-client";
-  // CommonJS
-  import { io } from "socket.io-client";
+import { initiateSocket, sendMessage, socketClient } from "./SocketIO";
+// import { io } from "socket.io-client";
+// CommonJS
+import { io } from "socket.io-client";
+import axios from "axios";
 
-  
 const { Title } = Typography;
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -83,56 +86,68 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
-
-
-
-
-function AuctionDetails({location,match}) {
-
-
-
-
-
+function AuctionDetails({ location, match }) {
+  // console.log("----route",location.state.selectedItem);
+  // console.log("----route",match.params.id);
+  const auctionId = match.params.id;
+  const selectedData = location.state.selectedItem;
+  const dispatch = useDispatch();
+  const biddings = useSelector(({ home }) => home.auctionBiddings.biddings);
   
-// console.log("----route",location.state.selectedItem);
-// console.log("----route",match.params.id);
-const auctionId = match.params.id
-const selectedData = location.state.selectedItem
-const dispatch = useDispatch()
-const biddings = useSelector(({home}) => home.auctionBiddings)
-console.log("ppppppp",biddings);
+  const currentBido = useSelector(({ home }) => home.auctionBiddings.currentBid);
 
+  console.log("ppppppp", biddings);
 
+  useEffect(() => {
+    initiateSocket();
 
-useEffect(() => {
-  initiateSocket()
-  onNewMessage().then(ff=>{
-    console.log("gggpppppp",ff);
-    
-  })
-dispatch(getAuctionBiddings(match.params.id))
-return () => {
- 
-}
-}, [])
+    socketClient().on("message", (message) => {
+      console.log("new message rece", message);
+      const params = {
+        currentBid: currentBid,
+        auctionId: auctionId,
+        biddings: message,
+      };
+      if (message.auctionId === auctionId) {
+        dispatch(placedNewBidSuccessfull(message));
+      }
+    });
 
+    dispatch(getAuctionBiddings(match.params.id));
+    return () => {};
+  }, []);
+
+  const sentNewBid = (data, newBid) => {
+    axios
+      .post("https://socket-io-2.herokuapp.com/api/bidding", data)
+      .then((response) => {
+        sendMessage(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const openNotification = (currentBid) => {
-  const existingBids = JSON.parse(JSON.stringify(biddings))
+    const existingBids = JSON.parse(JSON.stringify(biddings));
 
-const newbid =  {
-  auctionId:auctionId,
-userId:'xxxxx',
-  username:'shamshir anees',
-  bidAmount:currentBid,
-  bidTime: moment().unix()
-}
-const newArray = existingBids.concat([newbid])
+    const newbid = {
+      id: moment().unix(),
+      auctionId: auctionId,
+      userId: "xxxxx",
+      username: "shamshir anees",
+      bidAmount: currentBid,
+      bidTime: moment().unix(),
+    };
+    const newArray = existingBids.concat([newbid]);
 
-const params = { currentBid:currentBid,
-auctionId:auctionId,biddings:newArray}
-console.log("params",params);
-//  dispatch(placeNewBid(params))
-sendMessage('sss',"shasmhir Anees")
+    const params = {
+      currentBid: currentBid,
+      auctionId: auctionId,
+      biddings: newArray,
+    };
+    console.log("params", params);
+    sentNewBid(params,newbid)
+
     notification.open({
       icon: <CheckCircleTwoTone twoToneColor={Colors.green} />,
       message: "Bid Placed",
@@ -154,20 +169,23 @@ sendMessage('sss',"shasmhir Anees")
     },
   };
   const data = [
-    { name: "Lot #", value: selectedData.lotNo},
+    { name: "Lot #", value: selectedData.lotNo },
     { name: "Auction ID:", value: selectedData.auctionId },
-    { name: "Seller:", value:selectedData.sellerName },
+    { name: "Seller:", value: selectedData.sellerName },
     { name: "Quantity", value: selectedData.quantity },
-    { name: "Buyers Premium:", value: selectedData.buyersPremium+'%' },
+    { name: "Buyers Premium:", value: selectedData.buyersPremium + "%" },
     { name: "Item Unit:", value: selectedData.itemUnit },
     { name: "Current Bid:", value: "$ 50.00 No Reserve" },
-    { name: "Bid Increment:", value: "$"+selectedData.bidIncrement },
-    { name: "Next Bid:", value: "$"+ Number(selectedData.bidIncrement+selectedData.currentBid) },
+    { name: "Bid Increment:", value: "$" + selectedData.bidIncrement },
+    {
+      name: "Next Bid:",
+      value: "$" + Number(selectedData.bidIncrement + selectedData.currentBid),
+    },
   ];
- 
+
   const [selectedImage, setSelectedImage] = useState(0);
   const [progress, setProgress] = useState(10);
-  const [deadline, setdeadline] = useState(selectedData.endDateTime*1000);
+  const [deadline, setdeadline] = useState(selectedData.endDateTime * 1000);
   const classes = useStyles();
   const ref = useRef(null);
 
@@ -190,24 +208,27 @@ sendMessage('sss',"shasmhir Anees")
   const [currentBid, setcurrentBid] = useState(selectedData.currentBid);
   return (
     <div>
-      
-      {selectedData.startDateTime<new Date() &&
-      <div style={{ width: "100%", backgroundColor: "#e6f7ff" }}>
-        <Alert
-          style={{ width: "50%", margin: "auto" }}
-          message={
-            <span>
-              Bidding starts <strong>{moment(selectedData.startDateTime*1000).format('llll')}</strong>
-              <a>
-                <strong> Set reminder</strong>
-              </a>
-            </span>
-          }
-          banner
-          type="info"
-          showIcon
-        />
-      </div>}
+      {selectedData.startDateTime < new Date() && (
+        <div style={{ width: "100%", backgroundColor: "#e6f7ff" }}>
+          <Alert
+            style={{ width: "50%", margin: "auto" }}
+            message={
+              <span>
+                Bidding starts{" "}
+                <strong>
+                  {moment(selectedData.startDateTime * 1000).format("llll")}
+                </strong>
+                <a>
+                  <strong> Set reminder</strong>
+                </a>
+              </span>
+            }
+            banner
+            type="info"
+            showIcon
+          />
+        </div>
+      )}
 
       <Row
         gutter={{ xs: 16, sm: 16, md: 24, lg: 32 }}
@@ -218,17 +239,13 @@ sendMessage('sss',"shasmhir Anees")
           <Card>
             <Swiper ref={ref} {...params}>
               {selectedData.images.map((item) => (
-                <img
-                style={{height:'auto'}}
-                  src={item}
-                  alt=""
-                />
+                <img style={{ height: "auto" }} src={item} alt="" />
               ))}
             </Swiper>
           </Card>
 
           <Row gutter={[16, 16]} style={{ marginTop: 20 }}>
-            {selectedData.images.map((item,index) => (
+            {selectedData.images.map((item, index) => (
               <Col span={3}>
                 <div
                   onClick={() => goToImage(index)}
@@ -292,24 +309,27 @@ sendMessage('sss',"shasmhir Anees")
             {progress === 0 ? (
               <div>
                 <img src={flag} style={{ height: 150, width: 150 }} />
-                <div className="bid-amount">SOLD $ {selectedData.currentBid}</div>
+                <div className="bid-amount">
+                  SOLD $ {currentBido}
+                </div>
               </div>
             ) : (
               <div>
-                <div className="bid-amount">${selectedData.currentBid}</div>
+                <div className="bid-amount">${currentBido}</div>
                 <div style={{ fontSize: 14, marginBottom: 20 }}>
                   Current Bid (97 bids)
                 </div>
                 <Divider />
 
-                {selectedData.startDateTime>new Date() &&   <Countdown
-                  className="ant-statistic-content"
-                  onComplete={bidTimesUp}
-                  daysInHours={true}
-                  date={deadline}
-                  onTick={(s) => onCounterValueChange(s)}
-                />
-                }
+                {selectedData.startDateTime > new Date() && (
+                  <Countdown
+                    className="ant-statistic-content"
+                    onComplete={bidTimesUp}
+                    daysInHours={true}
+                    date={deadline}
+                    onTick={(s) => onCounterValueChange(s)}
+                  />
+                )}
                 {progress < 10 ? (
                   <Progress
                     percent={10 - progress === 0 ? 100 : (10 - progress) * 10}
@@ -330,10 +350,16 @@ sendMessage('sss',"shasmhir Anees")
                 >
                   <MinusCircleTwoTone
                     twoToneColor={
-                      currentBid === selectedData.currentBid ? "#ddd" : Colors.secondary
+                      currentBid === selectedData.currentBid
+                        ? "#ddd"
+                        : Colors.secondary
                     }
                     style={{ fontSize: 40 }}
-                    onClick={() => currentBid === selectedData.currentBid ?setcurrentBid(currentBid):setcurrentBid(currentBid - selectedData.bidIncrement)}
+                    onClick={() =>
+                      currentBid === selectedData.currentBid
+                        ? setcurrentBid(currentBid)
+                        : setcurrentBid(currentBid - selectedData.bidIncrement)
+                    }
                   />
                   <Title
                     style={{
@@ -347,13 +373,17 @@ sendMessage('sss',"shasmhir Anees")
                     $ {currentBid + selectedData.bidIncrement}
                   </Title>
                   <PlusCircleTwoTone
-                    onClick={() => setcurrentBid(currentBid + selectedData.bidIncrement)}
+                    onClick={() =>
+                      setcurrentBid(currentBid + selectedData.bidIncrement)
+                    }
                     twoToneColor={Colors.secondary}
                     style={{ fontSize: 40, color: Colors.secondary }}
                   />
                 </div>
                 <Button
-                  onClick={() => openNotification(currentBid + selectedData.bidIncrement)}
+                  onClick={() =>
+                    openNotification(currentBid + selectedData.bidIncrement)
+                  }
                   variant="contained"
                   color="secondary"
                   style={{ margin: 20, color: Colors.white }}
@@ -365,10 +395,10 @@ sendMessage('sss',"shasmhir Anees")
             <Divider />
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Timeline style={{ marginTop: 35, marginBottom: -20 }}>
-                {biddings.map((item) => (
+                {biddings.sort((a, b) => a.bidTime - b.bidTime).map((item) => (
                   <Timeline.Item>
-                    <strong>${item.bidAmount}</strong> by Bidder
-                    <em class="timestamp">4 minutes ago</em>
+                    <strong>${item.bidAmount}</strong> by {item.username }
+                    <em class="timestamp"> 4 minutes ago</em>
                   </Timeline.Item>
                 ))}
               </Timeline>
