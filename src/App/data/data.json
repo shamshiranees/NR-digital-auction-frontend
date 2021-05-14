@@ -1,136 +1,145 @@
 {
     "Header": {
 
-        "title": "We are a Landing Page",
-        "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sed commodo nibh ante facilisis bibendum."
+        "title": "Digital Auctions",
+        "paragraph": "An auction management platform designed to make your auctions more accessible, safe, profitable and easy to manage."
 
     },
-    "About": {
-        "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        "Why": [
-            "Lorem ipsum dolor",
-            "Tempor incididunt",
-            "Lorem ipsum dolor",
-            "Incididunt ut labore"
-        ],
-        "Why2": [
-            "Aliquip ex ea commodo",
-            "Lorem ipsum dolor",
-            "Exercitation ullamco",
-            "Lorem ipsum dolor"
-        ]
-    },
+  "About": {
+    "paragraph": "Digital auctions platform is packed with features that helps both sellers and buyers and make their life easier. We help the sellers with a platform to sell their products and buyers to get their products directly from the buyers. The goal is to help suppliers set up their auctions in the most just and transparent manner.",
+    "Why": [
+      "Fast",
+      "Transparent",
+      "Safe",
+      "Competitive"
+    ],
+    "Why2": [
+      "Ease of Use",
+      "Profitable",
+      "Reasonable Prices",
+      "Easily manageable"
+    ]
+  },
     "Services": [{
             "icon": "fa fa-wordpress",
-            "name": "Lorem ipsum dolor",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+            "name": "Set up auctions",
+            "text": "We walk you through the process of setting up and managing the auctions by yourself."
         },
         {
             "icon": "fa fa-cart-arrow-down",
-            "name": "Consectetur adipiscing",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+            "name": "Bid at your convenience",
+            "text": "As a bidder, you can make offers no matter your location, while relaxing at home or while on your lunch break."
         },
         {
             "icon": "fa fa-cloud-download",
-            "name": "Lorem ipsum dolor",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+            "name": "Fast and Easy",
+            "text": "Complete your biddings in minutes which otherwise may last for hours or even days. Experience the power of automation!"
         },
         {
             "icon": "fa fa-language",
-            "name": "Consectetur adipiscing",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+            "name": "Transparent transactions",
+            "text": "We bring complete transparency between the suppliers and buyers. We ensure trust."
         },
         {
             "icon": "fa fa-plane",
-            "name": "Lorem ipsum dolor",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+            "name": "Customize your site",
+            "text": "Have you set up this platform for placing you auctions? We ensure you have the look and feel of this site in the way you prefer."
         },
         {
             "icon": "fa fa-pie-chart",
-            "name": "Consectetur adipiscing",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+            "name": "Choices and more choices",
+            "text": "Quicker and take less energy. You can more easily pinpoint what you are looking for. We help you select exactly what you are looking for and filter out the rest."
         }
 
 
     ],
-    "Testimonials": [{
-            "img": "img/testimonials/01.jpg",
-            "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-            "name": "John Doe"
-        },
-        {
-            "img": "img/testimonials/02.jpg",
-            "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-            "name": "Johnathan Doe"
-        },
-        {
-            "img": "img/testimonials/03.jpg",
-            "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-            "name": "John Doe"
-        },
-        {
-            "img": "img/testimonials/04.jpg",
-            "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-            "name": "Johnathan Doe"
-        },
-        {
-            "img": "img/testimonials/05.jpg",
-            "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-            "name": "John Doe"
-        },
-        {
-            "img": "img/testimonials/06.jpg",
-            "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-            "name": "Johnathan Doe"
-        }
-    ],
-    "Team": [{
-            "img": "img/team/01.jpg",
-            "name": "John Doe",
-            "job": "Director"
-        },
-        {
-            "img": "img/team/02.jpg",
-            "name": "Mike Doe",
-            "job": "Senior Designer"
-        }, {
-            "img": "img/team/03.jpg",
-            "name": "Jane Doe",
-            "job": "Senior Designer"
-        },
-        {
-            "img": "img/team/04.jpg",
-            "name": "Karen Doe",
-            "job": "Project Manager"
-        }
-    ],
+  "Testimonials": [
+    {
+      "img": "img/testimonials/01.jpg",
+      "text": "\"We were given good advice and assisted throughout the process. The service given was seamless and very efficient.\"",
+      "name": "Richard Barlow, ANX Energy"
+    },
+    {
+      "img": "img/testimonials/02.jpg",
+      "text": "\"Wow achieved a sale at a good price two weeks after it came on the market and went straight to auction! What more could you ask for? An office in the centre of the city and it sold straight away. What a weight off my mind. THANK YOU\"",
+      "name": "William Smith, GreenLand Developers"
+    },
+    {
+      "img": "img/testimonials/03.jpg",
+      "text": "\"Just wanted to drop you a line to thank you for the professional service in setting up the auctions and selling our products. The honesty and transparency was highly appreciated and we will not hesitate to use your services again.\"",
+      "name": "JC Bristol"
+    },
+    {
+      "img": "img/testimonials/04.jpg",
+      "text": "\"Yet again for us, Digital Auctions have achieved a result at the recent auction that even surpassed our high expectations.\"",
+      "name": "Johnathan Doe"
+    },
+    {
+      "img": "img/testimonials/05.jpg",
+      "text": "\"I found the whole experience of the auction very exciting, from the setting up through to the auction time where a fantastic price was reached. All the beneficiaries were really pleased.\"",
+      "name": "John Doe"
+    },
+    {
+      "img": "img/testimonials/06.jpg",
+      "text": "\"We have been very pleased with the service and sale prices at Digital Auctions. Our expectations on price were low, but we achieved twice what we had budgeted for as a result of the auction process. I would not hesitate to use them again on anything.\"",
+      "name": "Johnathan Doe"
+    }
+  ],
+  "Team": [
+    {
+      "img": "img/team/01.jpg",
+      "name": "Shamshir Anees",
+      "job": "Director"
+    },
+    {
+      "img": "img/team/02.jpg",
+      "name": "Parthiban Jayaraj",
+      "job": "Senior Designer"
+    },
+    {
+      "img": "img/team/03.jpg",
+      "name": "Greeshma Josphin",
+      "job": "Senior Designer"
+    },
+    {
+      "img": "img/team/04.jpg",
+      "name": "Vinila C",
+      "job": "Project Manager"
+    },
+    {
+      "img": "img/team/04.jpg",
+      "name": "Haridasan Shanmugham",
+      "job": "Project Manager"
+    }
+  ],
     "Contact": {
-        "address": "4321 California St, San Francisco, CA 12345 ",
-        "phone": "+1 123 456 1234",
-        "email": "info@company.com",
+        "address": "World Trade Center, Infopark, Kerala, India ",
+        "phone": "+91 9896 786 879",
+        "email": "info@digitalauctions.com",
         "facebook": "fb.com",
         "twitter": "twitter.com",
         "youtube": "youtube.com"
     },
-    "Features": [{
-            "icon": "fa fa-comments-o",
-            "title": "Lorem ipsum",
-            "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
-        },
-        {
-            "icon": "fa fa-bullhorn",
-            "title": "Lorem ipsum",
-            "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
-        },
-        {
-            "icon": "fa fa-group",
-            "title": "Lorem ipsum",
-            "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
-        },
-        {
-            "icon": "fa fa-magic",
-            "title": "Lorem ipsum",
-            "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
-        }
-    ]
+  "Features": [
+    {
+      "icon": "fa fa-comments-o",
+      "title": "At your fingertip",
+      "text": "Whether you are a seller or buyer! Whether you are at home or office! Whether you are setting up an auction or placing a bid! It could never be as easy as Digital Auctions."
+    },
+    {
+      "icon": "fa fa-bullhorn",
+      "title": "Simple Auction Setup ever",
+      "text": "Our platform walks you through all necessary steps to get your auction set up and running in as little as 5 minutes."
+    },
+    {
+      "icon": "fa fa-group",
+      "title": "Biddings made easy",
+      "text": "Placing bids are simple as anything. Dashbaord gives you the real time trend of biddings on the item you wish to buy."
+    },
+    {
+      "icon": "fa fa-magic",
+      "title": "Dynamic Closing",
+      "text": "If biddings are rushing in even towards the end of closing time, we extend the closing time automatically to accommodate more bids."
+    }
+  ]
 }

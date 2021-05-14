@@ -67,9 +67,6 @@ const [auctionData, setauctionData] = useState([])
 
 useEffect(() => {
   dispatch(fetchActiveBids())
-
-
-
 }, [])
   return (
     <>

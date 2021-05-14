@@ -77,6 +77,9 @@ const SignUp = ({match}) => {
   
     try {
       await Auth.confirmSignUp(email, code);
+
+
+      
       history.push(`/home/shamshiranees`);
     } catch (error) {
       console.log("error confirming sign up", error);
