@@ -22,18 +22,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { fetchActiveBids } from '../../Redux/Actions/home';
 
-export function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -73,14 +62,14 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const classes = useStyles();
 const history = useHistory()
 const allBids = useSelector(({home}) => home.allBids)
+const userData = useSelector(({authReducer}) => authReducer.userData)
+console.log("userData",userData);
+
 const dispatch = useDispatch()
 const [auctionData, setauctionData] = useState([])
 
 useEffect(() => {
   dispatch(fetchActiveBids())
-
-
-
 }, [])
   return (
     <>
@@ -94,11 +83,12 @@ useEffect(() => {
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
-                <Grid item>
+              {userData.email == undefined && <Grid item>
                   <Button variant="contained" onClick={()=> history.push('/signup')} color="primary" >
                     Sign Up today!
                   </Button>
                 </Grid>
+              }
                 <Grid item>
                   <Button variant="outlined" color="primary">
                     View all auctions

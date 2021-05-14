@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -15,8 +15,9 @@ import Container from "@material-ui/core/Container";
 import Amplify, { Auth } from "aws-amplify";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { setSignupValue } from "../../Redux/Actions/auth";
+import { setSignupValue, setUserData } from "../../Redux/Actions/auth";
 import config from "../../../aws-exports";
+import { addNewUser } from '../../Redux/Actions/auth';
 
 
 Amplify.configure(config);
@@ -39,13 +40,17 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-const SignUp = () => {
+const SignUp = ({match}) => {
+
+  console.log("----typeee",match.params.type);
   const signUpVal = useSelector(({ authReducer }) => authReducer.signUpVal);
   const classes = useStyles();
   const history = useHistory();
   const [level, setlevel] = useState("signUp");
   const dispatch = useDispatch();
+  
   async function signUp() {
+    
     const {
       username,
       password,
@@ -53,8 +58,15 @@ const SignUp = () => {
       phone_number,
       firstName,
       lastName,
-      type,
+      type = "user",
     } = signUpVal;
+  const  userData = {
+      email: email,
+      password: password,
+      first_name: firstName,
+      last_name: lastName,
+      phone_number: phone_number
+    };
     try {
       const { user } = await Auth.signUp({
         username: email,
@@ -70,12 +82,28 @@ const SignUp = () => {
       console.log("error signing up:", error);
     }
   }
-  async function confirmSignUp() {
+  async function ConfirmSignUp() {
     const { email, code } = signUpVal;
-  
+    const {
+      username,
+      password,
+      phone_number,
+      firstName,
+      lastName,
+      type = "user",
+    } = signUpVal;
+  const  userData = {
+      email: email,
+      password: password,
+      first_name: firstName,
+      last_name: lastName,
+      phone_number: phone_number
+    };
     try {
       await Auth.confirmSignUp(email, code);
-      history.push(`/`);
+      dispatch(addNewUser(userData));
+      history.push(`/home/shamshiranees/`);
+     
     } catch (error) {
       console.log("error confirming sign up", error);
     }
@@ -83,8 +111,6 @@ const SignUp = () => {
   const onValueChange = (typ, val) => {
     dispatch(setSignupValue({ value: val.target.value, name: typ }));
   };
-// export default function SignUp() {
-//   const classes = useStyles();
 
   return (
     <Container component="main" maxWidth="xs" style={{paddingBottom:60}}>
@@ -214,7 +240,7 @@ const SignUp = () => {
               fullWidth
               variant="contained"
               color="primary"
-              onClick={confirmSignUp}
+              onClick={ConfirmSignUp}
             >
               Sign Up
             </Button>
@@ -227,5 +253,5 @@ const SignUp = () => {
       
     </Container>
   );
-};
+}
 export default SignUp;

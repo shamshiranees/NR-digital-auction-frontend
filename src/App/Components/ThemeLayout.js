@@ -18,6 +18,8 @@ export const ThemeLayout = (ComposedComponent, type = 1) => (props) => {
     <Layout className="layout">
       <Header style={{ backgroundColor: Colors.white }}>
         <div className="logo" />
+        {type === 1 && (
+          <>
         <Menu theme="light" mode="horizontal">
           <Menu.Item key="1" icon={<HomeOutlined />}>
             <Link to="/">Home</Link>
@@ -25,9 +27,9 @@ export const ThemeLayout = (ComposedComponent, type = 1) => (props) => {
           <Menu.Item key="2" icon={<CalendarOutlined />}>
             <Link to="/">Auctions</Link>
           </Menu.Item>
-          <Menu.Item key="3" icon={<FolderAddOutlined />}>
+          {/* <Menu.Item key="3" icon={<FolderAddOutlined />}>
             <Link to="/createauction">Create</Link>
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item key="4" icon={<AppstoreOutlined />}>
             <Link to="/category">Categories</Link>
           </Menu.Item>
@@ -52,6 +54,8 @@ export const ThemeLayout = (ComposedComponent, type = 1) => (props) => {
             </SubMenu>
           )}
         </Menu>
+        </>
+        )}
       </Header>
       <Content
         style={{

@@ -16,6 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setloginValue, setUserData } from "../../Redux/Actions/auth";
 import { useHistory, Link } from "react-router-dom";
 
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -45,7 +46,7 @@ const loginVal = useSelector(({authReducer}) => authReducer.loginVal);
         const user = await Auth.signIn(loginVal.email, loginVal.password);
 
        dispatch(setUserData(user.attributes))
-       history.push(`/`);
+       history.push(`/home/shamshiranees`);
         console.log("userrrr",user.attributes);
         
     } catch (error) {
