@@ -5,8 +5,38 @@ import {
   SET_BIDDINGS,SET_ALL_BIDS,
   ADD_CURRENCY,
   REMOVE_CURRENCY,
+  SET_USER_DATA,
 } from './types';
 import { sendMessage } from '../../Screens/ActionDetails/SocketIO';
+
+
+export function getUserData(id) {
+  return apiAction({
+    url:
+      `/user/${id}`,
+    method: 'GET',
+    onSuccess: setUser,
+    onFailure: setOnError,
+    label: FETCH_ALL_BID_DATA,
+  });
+}
+
+export function setUser(data) {
+//   var allBids = data.data[0]
+ 
+
+
+// const item = JSON.parse(allBids)
+
+console.log("---------ssss",data);
+  return {
+    type: SET_USER_DATA,
+    payload: data,
+  };
+}
+
+
+
 
 export function fetchActiveBids() {
   return apiAction({

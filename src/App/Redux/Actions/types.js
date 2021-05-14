@@ -14,6 +14,7 @@ export const FETCH_ALL_BID_DATA = 'FETCH_ALL_BID_DATA';
 
 export const SET_ALL_BIDS = 'SET_ALL_BIDS';
 export const SET_BIDDINGS = 'SET_BIDDINGS';
+export const FETCH_ALL_USER_DATA = 'FETCH_ALL_USER_DATA';
 
 
 
