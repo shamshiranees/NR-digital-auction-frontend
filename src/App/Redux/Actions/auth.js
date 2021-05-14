@@ -5,6 +5,7 @@ import { SET_LOGIN_VALUE, SET_SIGNUP_VALUE, SET_USER_DATA,
 
 
   export function getUserData(id) {
+    localStorage.setItem("email",id)
     return apiAction({
       url:
         `/users/${id}`,
@@ -20,7 +21,7 @@ import { SET_LOGIN_VALUE, SET_SIGNUP_VALUE, SET_USER_DATA,
   console.log("---------ssss",data);
     return {
       type: SET_USER_DATA,
-      payload: data,
+      payload: JSON.parse(data.data),
     };
   }
   
