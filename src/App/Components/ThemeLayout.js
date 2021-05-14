@@ -49,7 +49,7 @@ export const ThemeLayout = (ComposedComponent, type = 1) => (props) => {
 
           {type === 1 && (
             <SubMenu key="7" title="Profile" icon={<UserOutlined />}>
-              <Menu.Item key="setting:1">View Profile</Menu.Item>
+              <Menu.Item key="setting:1"><Link to="/profile">View Profile</Link></Menu.Item>
               <Menu.Item key="setting:2">Sign Out</Menu.Item>
             </SubMenu>
           )}
