@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -15,8 +15,9 @@ import Container from "@material-ui/core/Container";
 import Amplify, { Auth } from "aws-amplify";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { setSignupValue } from "../../Redux/Actions/auth";
+import { setSignupValue, setUserData } from "../../Redux/Actions/auth";
 import config from "../../../aws-exports";
+import { addNewUser } from '../../Redux/Actions/auth';
 
 
 Amplify.configure(config);
@@ -47,6 +48,7 @@ const SignUp = ({match}) => {
   const history = useHistory();
   const [level, setlevel] = useState("signUp");
   const dispatch = useDispatch();
+  var userData = {};
   async function signUp() {
     const {
       username,
@@ -55,8 +57,15 @@ const SignUp = ({match}) => {
       phone_number,
       firstName,
       lastName,
-      type,
+      type = "user",
     } = signUpVal;
+    userData = {
+      email: email,
+      password: password,
+      first_name: firstName,
+      last_name: lastName,
+      phone_number: phone_number
+    };
     try {
       const { user } = await Auth.signUp({
         username: email,
@@ -72,15 +81,14 @@ const SignUp = ({match}) => {
       console.log("error signing up:", error);
     }
   }
-  async function confirmSignUp() {
+  async function ConfirmSignUp() {
     const { email, code } = signUpVal;
   
     try {
       await Auth.confirmSignUp(email, code);
-
-
-      
-      history.push(`/home/shamshiranees`);
+      dispatch(addNewUser(userData));
+      history.push(`/home/shamshiranees/`);
+     
     } catch (error) {
       console.log("error confirming sign up", error);
     }
@@ -88,8 +96,6 @@ const SignUp = ({match}) => {
   const onValueChange = (typ, val) => {
     dispatch(setSignupValue({ value: val.target.value, name: typ }));
   };
-// export default function SignUp() {
-//   const classes = useStyles();
 
   return (
     <Container component="main" maxWidth="xs" style={{paddingBottom:60}}>
@@ -219,7 +225,7 @@ const SignUp = ({match}) => {
               fullWidth
               variant="contained"
               color="primary"
-              onClick={confirmSignUp}
+              onClick={ConfirmSignUp}
             >
               Sign Up
             </Button>
@@ -232,5 +238,5 @@ const SignUp = ({match}) => {
       
     </Container>
   );
-};
+}
 export default SignUp;
