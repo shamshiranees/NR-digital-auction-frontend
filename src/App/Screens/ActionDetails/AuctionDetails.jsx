@@ -287,7 +287,7 @@ function AuctionDetails({ location, match }) {
               <div>
                 <div className="bid-amount">${currentBido}</div>
                 <div style={{ fontSize: 14, marginBottom: 20 }}>
-                  Current Bid (97 bids)
+                  Current Bid ({biddings} bids)
                 </div>
                 <Divider />
 
