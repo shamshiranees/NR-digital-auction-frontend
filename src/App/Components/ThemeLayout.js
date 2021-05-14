@@ -22,10 +22,10 @@ export const ThemeLayout = (ComposedComponent, type = 1) => (props) => {
           <>
         <Menu theme="light" mode="horizontal">
           <Menu.Item key="1" icon={<HomeOutlined />}>
-            <Link to="/">Home</Link>
+            <Link to="/home/shamshir">Home</Link>
           </Menu.Item>
           <Menu.Item key="2" icon={<CalendarOutlined />}>
-            <Link to="/">Auctions</Link>
+            <Link to="/home/shamshir">Auctions</Link>
           </Menu.Item>
           {/* <Menu.Item key="3" icon={<FolderAddOutlined />}>
             <Link to="/createauction">Create</Link>
