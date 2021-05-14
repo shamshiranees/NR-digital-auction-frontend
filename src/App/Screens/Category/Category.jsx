@@ -3,6 +3,7 @@ import { Row, Col, Card, Typography, Button } from "antd";
 import { Grid } from "@material-ui/core";
 import BidCard from "../../Components/BidCard";
 import { ArrowRightOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 
 
 
@@ -23,6 +24,8 @@ function Category() {
 export default Category;
 
 function CategoryCard() {
+const allBids = useSelector(({home}) => home.allBids)
+
   return (
     <div style={{marginTop:30}}>
       <Row>
@@ -57,8 +60,8 @@ function CategoryCard() {
               </Col>
               <Col>
               <Grid container spacing={4}>
-                {[0, 1, 2].map((card) => (
-                  <BidCard card={card} type="category" />
+                {allBids.map((item) => (
+                  <BidCard data={item} key={item.auctionId} type="category" />
                 ))}
               </Grid>
               </Col>

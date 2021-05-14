@@ -53,6 +53,7 @@ const biddingData = {
   currentBid: data.currentBid,
   auctionId: data.auctionId,
   biddings: [],
+  currentBidEndTime:data.endDateTime*1000
 }
     dispatch(setBiddingsOnClick(biddingData))
     history.push(`/detail/${id}`,{selectedItem:data});

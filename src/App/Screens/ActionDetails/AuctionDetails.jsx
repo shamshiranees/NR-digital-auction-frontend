@@ -1,16 +1,6 @@
 import React, { useState, useRef } from "react";
-// import Timeline from "@material-ui/lab/Timeline";
-import TimelineItem from "@material-ui/lab/TimelineItem";
-import TimelineSeparator from "@material-ui/lab/TimelineSeparator";
-import TimelineConnector from "@material-ui/lab/TimelineConnector";
-import TimelineContent from "@material-ui/lab/TimelineContent";
-import TimelineDot from "@material-ui/lab/TimelineDot";
 import {
-  AppBar,
-  Toolbar,
-  //   Typography,
   Button,
-  Breadcrumbs,
   makeStyles,
   Grid,
   Card,
@@ -29,14 +19,10 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
-import Menu from "@material-ui/icons/Menu";
-import Info from "@material-ui/icons/Info";
-import { Link } from "react-router-dom";
 import { Colors } from "../../Theme";
 import Swiper from "react-id-swiper";
 import "swiper/css/swiper.css";
 import { Typography, Alert, Row, Col, Progress } from "antd";
-import { Statistic } from "antd";
 import { Timeline, notification } from "antd";
 import Countdown from "react-countdown";
 import {
@@ -60,31 +46,11 @@ import {
 } from "../../Redux/Actions/home";
 import { months } from "moment";
 import { initiateSocket, sendMessage, socketClient } from "./SocketIO";
-// import { io } from "socket.io-client";
-// CommonJS
 import { io } from "socket.io-client";
 import axios from "axios";
 
 const { Title } = Typography;
-const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(2),
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(5, 10, 10, 15),
-  },
-}));
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-    fontWeight: "bold",
-  },
-}))(TableCell);
+
 
 function AuctionDetails({ location, match }) {
   // console.log("----route",location.state.selectedItem);
@@ -95,6 +61,8 @@ function AuctionDetails({ location, match }) {
   const biddings = useSelector(({ home }) => home.auctionBiddings.biddings);
   
   const currentBido = useSelector(({ home }) => home.auctionBiddings.currentBid);
+  const currentEndTime = useSelector(({ home }) => home.auctionBiddings.currentBidEndTime);
+
 
   console.log("ppppppp", biddings);
 
@@ -144,6 +112,8 @@ function AuctionDetails({ location, match }) {
       currentBid: currentBid,
       auctionId: auctionId,
       biddings: newArray,
+      currentEndTime:selectedData.endDateTime,
+      currentBidTime:moment().unix()
     };
     console.log("params", params);
     sentNewBid(params,newbid)
@@ -216,7 +186,7 @@ function AuctionDetails({ location, match }) {
               <span>
                 Bidding starts{" "}
                 <strong>
-                  {moment(selectedData.startDateTime * 1000).format("llll")}
+                  {moment(currentEndTime).format("llll")}
                 </strong>
                 <a>
                   <strong> Set reminder</strong>
@@ -350,15 +320,15 @@ function AuctionDetails({ location, match }) {
                 >
                   <MinusCircleTwoTone
                     twoToneColor={
-                      currentBid === selectedData.currentBid
+                      currentBid === currentBido
                         ? "#ddd"
                         : Colors.secondary
                     }
                     style={{ fontSize: 40 }}
                     onClick={() =>
-                      currentBid === selectedData.currentBid
-                        ? setcurrentBid(currentBid)
-                        : setcurrentBid(currentBid - selectedData.bidIncrement)
+                      currentBid === currentBido
+                        ? setcurrentBid(currentBido)
+                        : setcurrentBid(currentBido - selectedData.bidIncrement)
                     }
                   />
                   <Title
@@ -370,11 +340,11 @@ function AuctionDetails({ location, match }) {
                     }}
                     level={2}
                   >
-                    $ {currentBid + selectedData.bidIncrement}
+                    $ {currentBido + selectedData.bidIncrement}
                   </Title>
                   <PlusCircleTwoTone
                     onClick={() =>
-                      setcurrentBid(currentBid + selectedData.bidIncrement)
+                      setcurrentBid(currentBido + selectedData.bidIncrement)
                     }
                     twoToneColor={Colors.secondary}
                     style={{ fontSize: 40, color: Colors.secondary }}
@@ -382,7 +352,7 @@ function AuctionDetails({ location, match }) {
                 </div>
                 <Button
                   onClick={() =>
-                    openNotification(currentBid + selectedData.bidIncrement)
+                    openNotification(currentBido + selectedData.bidIncrement)
                   }
                   variant="contained"
                   color="secondary"
@@ -471,5 +441,23 @@ function AuctionDetails({ location, match }) {
     </div>
   );
 }
-
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    marginRight: theme.spacing(2),
+  },
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(5, 10, 10, 15),
+  },
+}));
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+}))(TableCell);
 export default AuctionDetails;
