@@ -83,7 +83,7 @@ useEffect(() => {
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
-              {userData.email == undefined && <Grid item>
+              {userData.email === undefined && <Grid item>
                   <Button variant="contained" onClick={()=> history.push('/signup')} color="primary" >
                     Sign Up today!
                   </Button>
