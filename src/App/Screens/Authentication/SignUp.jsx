@@ -59,15 +59,9 @@ const SignUp = ({match}) => {
       phone_number,
       firstName,
       lastName,
-      type = "user",
+      type,
+      namebiddingplatform,
     } = signUpVal;
-  const  userData = {
-      email: email,
-      password: password,
-      first_name: firstName,
-      last_name: lastName,
-      phone_number: phone_number
-    };
     try {
       const { user } = await Auth.signUp({
         username: email,
@@ -83,6 +77,7 @@ const SignUp = ({match}) => {
       console.log("error signing up:", error);
     }
   }
+  
   async function ConfirmSignUp() {
     const { email, code } = signUpVal;
     const {
@@ -91,14 +86,18 @@ const SignUp = ({match}) => {
       phone_number,
       firstName,
       lastName,
-      type = "user",
+      type,
+      namebiddingplatform,
     } = signUpVal;
+
   const  userData = {
       email: email,
       password: password,
       first_name: firstName,
       last_name: lastName,
-      phone_number: phone_number
+      phone_number: phone_number,
+      type: "user",
+      namebiddingplatform: namebiddingplatform
     };
     try {
       await Auth.confirmSignUp(email, code);
@@ -161,10 +160,22 @@ const SignUp = ({match}) => {
                 id="email"
                 onChange={(val) => onValueChange("email", val)}
                 value={signUpVal.email}
-                //value={signUpVal.username}
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="namebiddingplatform"
+                onChange={(val) => onValueChange("namebiddingplatform", val)}
+                value={signUpVal.namebiddingplatform}
+                label="Name of Bidding platform"
+                name="namebiddingplatform"
+                autoComplete="namebiddingplatform"
               />
             </Grid>
             <Grid item xs={12}>

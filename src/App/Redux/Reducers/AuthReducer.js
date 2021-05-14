@@ -18,6 +18,7 @@ const INITIAL_STATE = {
     lastName: "",
     type: "",
     code: "",
+    namebiddingplatform: "",
   },
   userData: {},
 };
