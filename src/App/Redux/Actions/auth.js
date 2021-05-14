@@ -1,11 +1,42 @@
+import logger from 'redux-logger';
 import apiAction from './index';
-import { SET_LOGIN_VALUE, SET_SIGNUP_VALUE,SET_USER_DATA, 
+import { SET_LOGIN_VALUE, SET_SIGNUP_VALUE, SET_USER_DATA, 
   DATA_FETCH_ERROR, FETCH_ALL_USER_DATA } from "./types";
 
-export function addNewUser(data) {
 
-  console.log("dataaauserrr",data);
+  export function getUserData(id) {
+    return apiAction({
+      url:
+        `/users/${id}`,
+      method: 'GET',
+      onSuccess: setUser,
+      onFailure: setOnError,
+      label: FETCH_ALL_USER_DATA,
+    });
+  }
   
+  export function setUser(data) {
+ 
+  console.log("---------ssss",data);
+    return {
+      type: SET_USER_DATA,
+      payload: data,
+    };
+  }
+  
+
+  export function fetchActiveUsers() {
+    return apiAction({
+      url:
+        '/users',
+      method: 'GET',
+      onSuccess: setUserData,
+      onFailure: setOnError,
+      label: FETCH_ALL_USER_DATA,
+    });
+  }
+
+export function addNewUser(data) {
   return apiAction({
     url:
       `/users`,
@@ -40,6 +71,7 @@ export function setloginValue(data) {
     };
   }
   export function setUserData(data) {
+    console.log("---------sspp",data);
     return {
       type: SET_USER_DATA,
       payload: data,
