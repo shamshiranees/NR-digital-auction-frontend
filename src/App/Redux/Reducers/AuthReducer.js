@@ -19,14 +19,14 @@ const INITIAL_STATE = {
     type: "",
     code: "",
   },
-  user: {},
+  userData: {},
 };
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case SET_USER_DATA:
       return {
         ...state,
-        user: action.payload,
+        userData: action.payload,
       };
     case SET_LOGIN_VALUE:
       return {

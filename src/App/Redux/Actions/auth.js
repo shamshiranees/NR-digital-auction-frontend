@@ -40,6 +40,8 @@ export function setloginValue(data) {
     };
   }
   export function setUserData(data) {
+    console.log("setUserData",data);
+    
     return {
       type: SET_USER_DATA,
       payload: data,

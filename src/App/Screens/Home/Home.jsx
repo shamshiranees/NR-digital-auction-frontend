@@ -62,7 +62,8 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const classes = useStyles();
 const history = useHistory()
 const allBids = useSelector(({home}) => home.allBids)
-const userData = useSelector(({auctionReducer}) => auctionReducer.user)
+const userData = useSelector(({authReducer}) => authReducer.userData)
+console.log("userData",userData);
 
 const dispatch = useDispatch()
 const [auctionData, setauctionData] = useState([])
