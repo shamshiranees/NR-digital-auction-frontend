@@ -15,6 +15,7 @@ import MyBiddings from "./App/Screens/MyBiddings/MyBiddings";
 import Category from "./App/Screens/Category/Category";
 import Profile from "./App/Screens/Profile/Profile";
 import LandingPage from "./App/Screens/LandingPage";
+import Settings from "./App/Screens/Settings/Settings"
 
 const theme = createMuiTheme({
   palette: {
@@ -26,9 +27,8 @@ const theme = createMuiTheme({
       // This is green.A700 as hex.
       main: "#5ABFC0",
     },
-    
   },
-});
+})
 
 function App() {
   return (
@@ -50,12 +50,7 @@ function App() {
             <Route exact path="/myBiddings" component={ThemeLayout(MyBiddings)} />
             <Route exact path="/category" component={ThemeLayout(Category)} />
             <Route exact path="/profile" component={ThemeLayout(Profile)} />
-
-
-
-            
-
-
+            <Route exact path="/settings" component={ThemeLayout(Settings)} />
 
             {/* <Route exact path="/profile" component={Profile} />
             <Route exact path="/myinvestments" component={MyInvestments} />
@@ -64,7 +59,7 @@ function App() {
         </Router>
       </ThemeProvider>
     </Provider>
-  );
+  )
 }
 
-export default App;
+export default App
