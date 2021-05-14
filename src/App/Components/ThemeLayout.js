@@ -18,6 +18,8 @@ export const ThemeLayout = (ComposedComponent, type = 1) => (props) => {
     <Layout className="layout">
       <Header style={{ backgroundColor: Colors.white }}>
         <div className="logo" />
+        {type === 1 && (
+          <>
         <Menu theme="light" mode="horizontal">
           <Menu.Item key="1" icon={<HomeOutlined />}>
             <Link to="/">Home</Link>
@@ -52,6 +54,8 @@ export const ThemeLayout = (ComposedComponent, type = 1) => (props) => {
             </SubMenu>
           )}
         </Menu>
+        </>
+        )}
       </Header>
       <Content
         style={{

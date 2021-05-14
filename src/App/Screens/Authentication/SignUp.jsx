@@ -39,7 +39,9 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-const SignUp = () => {
+const SignUp = ({match}) => {
+
+  console.log("----typeee",match.params.type);
   const signUpVal = useSelector(({ authReducer }) => authReducer.signUpVal);
   const classes = useStyles();
   const history = useHistory();
@@ -75,7 +77,7 @@ const SignUp = () => {
   
     try {
       await Auth.confirmSignUp(email, code);
-      history.push(`/`);
+      history.push(`/home/shamshiranees`);
     } catch (error) {
       console.log("error confirming sign up", error);
     }
