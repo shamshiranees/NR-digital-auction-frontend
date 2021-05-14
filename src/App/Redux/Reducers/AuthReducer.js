@@ -6,7 +6,7 @@ import {
 
 const INITIAL_STATE = {
   loginVal: {
-    username: "",
+    email: "",
     password: "",
   },
   signUpVal: {
@@ -14,7 +14,8 @@ const INITIAL_STATE = {
     password: "",
     email: "",
     mobile: "",
-    fullName: "",
+    firstName: "",
+    lastName: "",
     type: "",
     code: "",
   },
