@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "technauction14590fee": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
