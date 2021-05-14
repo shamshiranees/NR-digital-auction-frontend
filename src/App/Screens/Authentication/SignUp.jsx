@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
+
 const SignUp = ({match}) => {
 
   console.log("----typeee",match.params.type);
@@ -48,7 +49,7 @@ const SignUp = ({match}) => {
   const history = useHistory();
   const [level, setlevel] = useState("signUp");
   const dispatch = useDispatch();
-  
+
   async function signUp() {
     
     const {
@@ -102,8 +103,8 @@ const SignUp = ({match}) => {
     try {
       await Auth.confirmSignUp(email, code);
       dispatch(addNewUser(userData));
-      history.push(`/home/shamshiranees/`);
-     
+      
+      history.push(`/home/shamshiranees`);
     } catch (error) {
       console.log("error confirming sign up", error);
     }

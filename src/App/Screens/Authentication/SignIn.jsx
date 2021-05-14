@@ -15,6 +15,7 @@ import { Auth } from 'aws-amplify';
 import { useSelector, useDispatch } from "react-redux";
 import { setloginValue, setUserData } from "../../Redux/Actions/auth";
 import { useHistory, Link } from "react-router-dom";
+import { getUserData } from '../../Redux/Actions/auth';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +46,8 @@ const loginVal = useSelector(({authReducer}) => authReducer.loginVal);
     try {
         const user = await Auth.signIn(loginVal.email, loginVal.password);
 
-       dispatch(setUserData(user.attributes))
+        dispatch(getUserData(loginVal.email))
+      
        history.push(`/home/shamshiranees`);
         console.log("userrrr",user.attributes);
         
