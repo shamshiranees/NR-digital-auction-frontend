@@ -62,6 +62,8 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const classes = useStyles();
 const history = useHistory()
 const allBids = useSelector(({home}) => home.allBids)
+const userData = useSelector(({auctionReducer}) => auctionReducer.user)
+
 const dispatch = useDispatch()
 const [auctionData, setauctionData] = useState([])
 
@@ -80,11 +82,12 @@ useEffect(() => {
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
-                <Grid item>
+              {userData.email == undefined && <Grid item>
                   <Button variant="contained" onClick={()=> history.push('/signup')} color="primary" >
                     Sign Up today!
                   </Button>
                 </Grid>
+              }
                 <Grid item>
                   <Button variant="outlined" color="primary">
                     View all auctions

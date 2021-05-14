@@ -3,6 +3,9 @@ import { SET_LOGIN_VALUE, SET_SIGNUP_VALUE,SET_USER_DATA,
   DATA_FETCH_ERROR, FETCH_ALL_USER_DATA } from "./types";
 
 export function addNewUser(data) {
+
+  console.log("dataaauserrr",data);
+  
   return apiAction({
     url:
       `/users`,

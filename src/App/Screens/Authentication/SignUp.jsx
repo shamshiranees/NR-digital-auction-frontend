@@ -48,8 +48,9 @@ const SignUp = ({match}) => {
   const history = useHistory();
   const [level, setlevel] = useState("signUp");
   const dispatch = useDispatch();
-  var userData = {};
+  
   async function signUp() {
+    
     const {
       username,
       password,
@@ -59,7 +60,7 @@ const SignUp = ({match}) => {
       lastName,
       type = "user",
     } = signUpVal;
-    userData = {
+  const  userData = {
       email: email,
       password: password,
       first_name: firstName,
@@ -83,7 +84,21 @@ const SignUp = ({match}) => {
   }
   async function ConfirmSignUp() {
     const { email, code } = signUpVal;
-  
+    const {
+      username,
+      password,
+      phone_number,
+      firstName,
+      lastName,
+      type = "user",
+    } = signUpVal;
+  const  userData = {
+      email: email,
+      password: password,
+      first_name: firstName,
+      last_name: lastName,
+      phone_number: phone_number
+    };
     try {
       await Auth.confirmSignUp(email, code);
       dispatch(addNewUser(userData));
