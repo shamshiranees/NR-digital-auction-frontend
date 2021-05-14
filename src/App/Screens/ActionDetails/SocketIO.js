@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 let socket;
 export const initiateSocket = (room) => {
-  socket = io("http://localhost:2000/");
+  socket = io("https://socket-io-2.herokuapp.com/");
   console.log(`Connecting socket...`);
   socket.on("connect", () => {
     console.log(`connected socket...`);
