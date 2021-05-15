@@ -90,6 +90,7 @@ function AuctionDetails({ location, match }) {
       .post("https://socket-io-2.herokuapp.com/api/bidding", data)
       .then((response) => {
         sendMessage(data);
+        
       })
       .catch((error) => {
         console.log(error);

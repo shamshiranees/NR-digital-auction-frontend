@@ -87,29 +87,29 @@
   ],
   "Team": [
     {
-      "img": "img/team/01.jpg",
+      "img": "img/team/01.png",
       "name": "Shamshir Anees",
-      "job": "Director"
+      "job": "Frontend Developer"
     },
     {
-      "img": "img/team/02.jpg",
+      "img": "img/team/02.jpeg",
       "name": "Parthiban Jayaraj",
-      "job": "Senior Designer"
+      "job": "Backend Developer"
     },
     {
-      "img": "img/team/03.jpg",
+      "img": "img/team/03.jpeg",
       "name": "Greeshma Josphin",
-      "job": "Senior Designer"
+      "job": "Backend Developer"
     },
     {
-      "img": "img/team/04.jpg",
+      "img": "img/team/04.jpeg",
       "name": "Vinila C",
-      "job": "Project Manager"
+      "job": "Frontend Developer"
     },
     {
-      "img": "img/team/04.jpg",
+      "img": "img/team/05.jpeg",
       "name": "Haridasan Shanmugham",
-      "job": "Project Manager"
+      "job": "Frontend Developer"
     }
   ],
     "Contact": {
