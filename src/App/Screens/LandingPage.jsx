@@ -8,7 +8,7 @@ import { Gallery } from '../Components/gallery'
 import { Testimonials } from '../Components/testimonials'
 import { Team } from '../Components/Team'
 import { Contact } from '../Components/contact'
-import JsonData from '../data/data.json'
+import JsonData from './data.json'
 import SmoothScroll from 'smooth-scroll'
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
